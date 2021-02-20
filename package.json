@@ -1,0 +1,23 @@
+{
+  "name": "budgeteer",
+  "version": "1.0.0",
+  "description": "the latest and greatest budgeting app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuathomas2/Budgeteer.git"
+  },
+  "keywords": [
+    "budgeting",
+    "app"
+  ],
+  "author": "Josh Thomas, Jaythan Hew, Kolten Nay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshuathomas2/Budgeteer/issues"
+  },
+  "homepage": "https://github.com/joshuathomas2/Budgeteer#readme"
+}
