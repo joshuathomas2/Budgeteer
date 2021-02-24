@@ -13,4 +13,4 @@ function Main (props) {
     )
 }
 
-ReactDOM.render(<Main/>, document.getElementById('main'))
+ReactDOM.render(<Main/>, document.getElementById('main'));
