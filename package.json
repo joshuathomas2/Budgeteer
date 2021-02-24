@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "deploy": "npx webpack",
-    "start": "npx webpack serve"
+    "start": "npx webpack serve",
+    "server": "nodemon --exec babel-node server.js"
   },
   "repository": {
     "type": "git",

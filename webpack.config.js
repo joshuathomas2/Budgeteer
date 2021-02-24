@@ -5,6 +5,7 @@ module.exports = {
     entry: {
         main: './src/javascripts/main.js'
     },
+    watch: true,
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
@@ -21,7 +22,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                query: { presets: ['@babel/preset-env', '@babel/preset-react'] }
+                options: { presets: ['@babel/preset-env', '@babel/preset-react'] }
             }, {
                 test: /\.css$/,
                 use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
