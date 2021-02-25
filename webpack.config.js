@@ -30,7 +30,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
             }, {
-                test: /\.(html|json|txt|dat|gif|jpg|png|svg|eot|ttf|woff|woff2)$/i,
+                test: /\.(html|json|txt|dat|gif|jpg|ico|png|svg|eot|ttf|woff|woff2)$/i,
                 use: [{
                     loader: 'file-loader',
                     options: {

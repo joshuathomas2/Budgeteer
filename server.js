@@ -1,4 +1,3 @@
-// Server
 import {connect} from './src/javascripts/config/db/connect';
 import {configureRoutes} from './src/javascripts/config/routes';
 
@@ -27,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Routes
 configureRoutes(app);
 
+// Error handling
 app.use(function(req, res, next) {
     next(createError(404));
 })
@@ -36,6 +36,7 @@ app.use(function(err, req, res, next) {
     res.render('layout', {error: err, status: err.status, content: 'error'});
 })
 
+// Web server
 let http = require('http');
 let server = http.createServer(app);
 
