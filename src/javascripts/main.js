@@ -15,7 +15,7 @@ function Main (props) {
 
 function Test (props) {
     return (
-        <div>Test!</div>
+        <div>Kolten Test!</div>
     )
 }
 
