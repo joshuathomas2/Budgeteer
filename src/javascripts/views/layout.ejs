@@ -35,13 +35,9 @@
 
     <%- include("test") %>
 
-    <% if (content) { %>
-    <%- include(content) %>
-    <% } else { %>
-    <p>Nothing to display.</p>
-    <% } %>
-
     <%- include("partials/_footer") %>
+
+    <p>This text is coming from layout.ejs</p>
 
     <script src="javascripts/main.js"></script>
 </body>
