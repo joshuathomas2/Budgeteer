@@ -16,8 +16,8 @@ export function configureRoutes(app) {
     router.get('/category', categoryPage);
     router.get('/transaction', transactionPage);
 
-    // Needs to be locked behind auth once done TODO
-    router.get('/home', homePage);
+    // Needs to be locked behind auth once done, sends user to login if not logged in TODO
+    router.get('/', homePage);
 
     // API
     // TODO
