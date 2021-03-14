@@ -1,5 +1,5 @@
 import express from 'express';
-import {indexPage} from '../controllers/index';
+import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionPage, transactionsListPage} from '../controllers/index';
 
 let router = express.Router();
 
@@ -7,7 +7,17 @@ export function configureRoutes(app) {
     console.log('Configuring routes');
 
     // PAGES
-    router.get('/', indexPage);
+    router.get('/registerPage', registerPage);
+    router.get('/login', loginPage);
+    router.get('/categories', categoriesListPage);
+    router.get('/transactions', transactionsListPage);
+    
+    // Needs to have an id passed in to access specific resource TODO
+    router.get('/category', categoryPage);
+    router.get('/transaction', transactionPage);
+
+    // Needs to be locked behind auth once done TODO
+    router.get('/home', homePage);
 
     // API
     // TODO
