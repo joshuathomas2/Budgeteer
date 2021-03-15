@@ -25,7 +25,8 @@ export function configureRoutes(app) {
     router.get('/category', categoryPage);
     router.get('/transaction', transactionPage);
 
-    // Needs to be locked behind auth once done, sends user to login if not logged in TODO
+    // How do we want to do this? Going to / should take a user to the homepage if signed in
+    // and login page if not signed in? TODO
     router.get('/', homePage);
 
     // API
