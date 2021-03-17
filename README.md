@@ -1,5 +1,7 @@
 # Budgeteer
-the latest and greatest budgeting app
+The latest and greatest budgeting app!
 
 # Developers
-Josh Thomas, Jaythan Hew, Kolten Nay
+Frontend: Jaythan Hew, Kolten Nay
+
+Backend: Josh Thomas, Kolten Nay
