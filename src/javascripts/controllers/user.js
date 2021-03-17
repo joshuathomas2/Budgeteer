@@ -5,9 +5,14 @@ import {User} from '../models/User';
 
 export const registerUserAPI = (req, res, next) => {
 
-    console.log(`user: ${req.body.first_name}`);
-
     let user = new User;
+
+    if (!req.body.first_name || !req.body.last_name || !req.body.email || !req.body.password) {
+        res.status(400);
+        res.json({success: false, message: 'One or more of the required parameters (first_name, last_name, email, password) were not received'});
+        res.end();
+        return;
+    }
 
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
@@ -18,9 +23,11 @@ export const registerUserAPI = (req, res, next) => {
     user.save(err => {
         if (err) {
             console.log(err);
-            res.json({success: false, message: 'User registration failed'});
+            res.status(400);
+            res.json({success: false, message: `User registration failed (user with email ${req.body.email} already exists)`});
             res.end();
         } else {
+            res.json({success: true, message: 'User registration successful'})
             res.end();
         }
     })
@@ -35,9 +42,11 @@ export const loginUserAPI = (req, res, next) => {
             if (user) {
                 let token = user.generateJWT();
                 res.cookie('token', token, {maxAge: 1000 * 60 * 60 * 24});
+                res.json({success: true, message: 'Login successful'});
                 res.end();
             } else {
-                res.status(401).json(err);
+                res.status(401);
+                res.json({success: false, message: 'Login failed, incorrect password or username'});
                 res.end();
             }
         }
