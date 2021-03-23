@@ -12,6 +12,7 @@ $theme-colors: (
   "light": #a5e9bf,
   "secondary": #05386b,
   "info": #edf5e1,
+  "danger": #fe5d26
 );
 
 @import "~bootstrap/scss/bootstrap";
@@ -39,4 +40,10 @@ body {
 // FOOTER STYLING
 #footer {
   margin-bottom: 0px;
+}
+
+//FORM STYLING 
+
+.input-shadow {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
