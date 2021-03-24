@@ -1,2 +1,53 @@
 // Styles
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Proza+Libre:wght@400;700&display=swap");
+
+$font-family-sans-serif: "Open Sans";
+$font-family-serif: "Proza Libre";
+$enable-responsive-font-sizes: true;
+
+$theme-colors: (
+  "primary": #379683,
+  "light": #a5e9bf,
+  "secondary": #05386b,
+  "info": #edf5e1,
+  "danger": #fe5d26
+);
+
+@import "~bootstrap/scss/bootstrap";
+
+// GLOBAL STYLE RULES
+h1,
+h2,
+h3 {
+  font-family: $font-family-serif;
+}
+
+h4 {
+  font-family: $font-family-sans-serif;
+}
+
+body {
+  font-family: $font-family-sans-serif;
+}
+
+// NAVBAR STYLING
+.nav-item {
+  color: #edf5e1;
+}
+
+.nav-logo {
+  height: 50px;
+  width: 50px;
+}
+
+// FOOTER STYLING
+#footer {
+  margin-bottom: 0px;
+}
+
+//FORM STYLING 
+.input-shadow {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
