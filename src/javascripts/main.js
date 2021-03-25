@@ -5,19 +5,12 @@ require.context('../stylesheets/', true, /\.(css|scss)$/i)
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {LoginForm} from './components/LoginForm';
+import {RegisterForm} from './components/RegisterForm';
 import 'bootstrap';
 
-function Main (props) {
-    return (
-        <div>Hello world!</div>
-    )
+if (document.getElementById('LoginForm')) {
+    ReactDOM.render(<LoginForm/>, document.getElementById('LoginForm'));
+} else if (document.getElementById('RegisterForm')) {
+    ReactDOM.render(<RegisterForm/>, document.getElementById('RegisterForm'));
 }
-
-function Test (props) {
-    return (
-        <div>Josh Test!</div>
-    )
-}
-
-ReactDOM.render(<Main/>, document.getElementById('main'));
-ReactDOM.render(<Test/>, document.getElementById('test'));
