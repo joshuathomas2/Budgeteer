@@ -16,7 +16,7 @@ export function configureRoutes(app) {
     })
 
     // PAGES
-    router.get('/registerPage', registerPage);
+    router.get('/register', registerPage);
     router.get('/login', loginPage);
     router.get('/categories', categoriesListPage);
     router.get('/transactions', transactionsListPage);
