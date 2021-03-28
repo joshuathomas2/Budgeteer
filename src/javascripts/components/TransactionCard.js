@@ -16,7 +16,7 @@ export function TransactionCard(props) {
             </tr>
           </thead>
           <tbody>
-            {/* will need to be rendered dynamically  from transaction data passed in via props */}
+            {/*TODO: each of these rows will need to be separated into one component with dynamic transaction data being passed */}
             <tr>
               <th scope="row">Title</th>
               <td>Label</td>
