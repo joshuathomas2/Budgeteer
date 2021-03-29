@@ -48,7 +48,9 @@ body {
 
 // FOOTER STYLING
 #footer {
-  margin-bottom: 0px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 //FORM STYLING 

@@ -17,7 +17,7 @@ export const settingsPage = (req, res, next) => {
 }
 
 export const transactionsListPage = (req, res, next) => {
-    res.render('layout', {content: 'transactions'});
+    res.render('layout', {content: 'transactions_list'});
 } 
 
 export const transactionPage = (req, res, next) => {

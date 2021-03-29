@@ -7,10 +7,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {LoginForm} from './components/LoginForm';
 import {RegisterForm} from './components/RegisterForm';
+import {TransactionsCardList} from './components/TransactionsCardList'
 import 'bootstrap';
 
 if (document.getElementById('LoginForm')) {
     ReactDOM.render(<LoginForm/>, document.getElementById('LoginForm'));
 } else if (document.getElementById('RegisterForm')) {
     ReactDOM.render(<RegisterForm/>, document.getElementById('RegisterForm'));
+} else if (document.getElementById('TransactionsCardList')) {
+    ReactDOM.render(<TransactionsCardList/>, document.getElementById('TransactionsCardList'))
 }
