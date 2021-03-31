@@ -1,4 +1,5 @@
 import React from "react";
+import { TransactionRow } from './TransactionRow'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 export function TransactionCard(props) {
@@ -17,27 +18,9 @@ export function TransactionCard(props) {
           </thead>
           <tbody>
             {/*TODO: each of these rows will need to be separated into one component with dynamic transaction data being passed */}
-            <tr>
-              <th scope="row">Title</th>
-              <td>Label</td>
-              <td>xxx</td>
-              <td><a className="text-secondary" href="/"><FontAwesomeIcon icon={faEye} /></a> <a className="text-danger"  href="/"><FontAwesomeIcon icon={faMinusCircle} /></a></td>
-    
-            </tr>
-            <tr>
-              <th scope="row">Title</th>
-              <td>Label</td>
-              <td>xxx</td>
-              <td><a className="text-secondary"  href="/"><FontAwesomeIcon icon={faEye} /></a> <a className="text-danger" href="/"><FontAwesomeIcon icon={faMinusCircle} /></a></td>
-     
-            </tr>
-            <tr>
-              <th scope="row">Title</th>
-              <td>Label</td>
-              <td>xxx</td>
-              <td><a  className="text-secondary" href="/"><FontAwesomeIcon icon={faEye} /></a> <a className="text-danger"  href="/"><FontAwesomeIcon icon={faMinusCircle} /></a></td>
-            
-            </tr>
+            <TransactionRow></TransactionRow>
+            <TransactionRow></TransactionRow>
+            <TransactionRow></TransactionRow>
           </tbody>
         </table>
         <button type="button" className="btn btn-primary">
