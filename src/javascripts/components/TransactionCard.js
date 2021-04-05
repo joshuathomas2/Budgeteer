@@ -12,7 +12,7 @@ export function TransactionCard(props) {
               <th scope="col">Title</th>
               <th scope="col">Label</th>
               <th scope="col">Amount</th>
-              <th scope="col"></th>
+              <th scope="col">Edit/Delete</th>
             </tr>
           </thead>
           <tbody>
