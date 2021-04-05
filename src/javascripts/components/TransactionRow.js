@@ -5,7 +5,7 @@ import { faEye, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 export function TransactionRow(props) {
     return (
         <tr>
-        <th scope="row">Title</th>
+        <td scope="row">Title</td>
         <td>Label</td>
         <td>xxx</td>
         <td>
