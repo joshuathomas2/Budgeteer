@@ -11,19 +11,18 @@ let userSchema = new Schema({
         unique: true,
         required: true
     },
-    first_name: {
+    username: {
         type: String,
-        required: true
-    },
-    last_name: {
-        type: String,
+        unique: true,
         required: true
     },
     password_salt: {
-        type: String
+        type: String,
+        required: true
     },
     password_hash: {
-        type: String
+        type: String,
+        required: true
     },
     daily_spending_limit: {
         type: Number
@@ -54,8 +53,7 @@ userSchema.methods.generateJWT = function() {
     return jwt.sign({
         _id: this._id,
         email: this.email,
-        first_name: this.first_name,
-        last_name: this.last_name,
+        username: this.username,
         exp: parseInt(expiresOn.getTime() / 1000)
     }, APP_SECRET);
 }
