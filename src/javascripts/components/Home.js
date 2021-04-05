@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Home() {
+export function Home(props) {
 	return (
 		<>
 			<header class="jumbotron my-4 bg-light">
