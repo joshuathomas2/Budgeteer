@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom'
 import {LoginForm} from './components/LoginForm';
 import {RegisterForm} from './components/RegisterForm';
 import {TransactionsCardList} from './components/TransactionsCardList'
+import {TransactionForm} from './components/TransactionForm'
 import 'bootstrap';
 
 if (document.getElementById('LoginForm')) {
@@ -16,4 +17,6 @@ if (document.getElementById('LoginForm')) {
     ReactDOM.render(<RegisterForm/>, document.getElementById('RegisterForm'));
 } else if (document.getElementById('TransactionsCardList')) {
     ReactDOM.render(<TransactionsCardList/>, document.getElementById('TransactionsCardList'))
+} else if (document.getElementById('TransactionForm')) {
+    ReactDOM.render(<TransactionForm/>, document.getElementById('TransactionForm'))
 }
