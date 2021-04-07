@@ -6,7 +6,7 @@ export function TransactionCard(props) {
     <div className="card bg-info m-3">
       <div className="card-body">
         <h5 className="card-title text-center">Category Title</h5>
-        <table class="table table-striped">
+        <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">Title</th>
@@ -24,9 +24,9 @@ export function TransactionCard(props) {
             <TransactionRow></TransactionRow>
           </tbody>
         </table>
-        <button type="button" className="btn btn-primary">
+        <a href="/transaction/new" className="btn btn-primary">
           Add Transaction
-        </button>
+        </a>
       </div>
     </div>
   );
