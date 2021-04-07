@@ -4,7 +4,7 @@ export function Home(props) {
 	return (
 		<>
 			<header class="jumbotron my-4 bg-light">
-				<h1 class="display-3 text-center">Budgeteer</h1>
+				<h1 class="display-3 text-secondary text-center">Welcome, User</h1>
 				<div class="row">
 					<div class="col-6">
 						<p>Graph 1</p>
@@ -14,7 +14,7 @@ export function Home(props) {
 					</div>
 				</div>
 			</header>
-			<section id="home-info bg-light">
+			<section id="home-info" class="bg-light mb-5">
 				<div class="row">
 					<div class="col-1">
 					</div>

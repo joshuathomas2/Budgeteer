@@ -9,9 +9,7 @@ import {LoginForm} from './components/LoginForm';
 import {RegisterForm} from './components/RegisterForm';
 import {TransactionsCardList} from './components/TransactionsCardList';
 import {Home} from './components/Home';
-import {TransactionsCardList} from './components/TransactionsCardList'
-import {Home} from './components/Home'
-import {TransactionForm} from './components/TransactionForm'
+import {TransactionForm} from './components/TransactionForm';
 import 'bootstrap';
 
 if (document.getElementById('LoginForm')) {
