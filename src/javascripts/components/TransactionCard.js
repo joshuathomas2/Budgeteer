@@ -1,11 +1,11 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { TransactionRow } from './TransactionRow'
+
 export function TransactionCard(props) {
   return (
     <div className="card bg-info m-3">
       <div className="card-body">
-        <h5 className="card-title">Category Title</h5>
+        <h5 className="card-title text-center">Category Title</h5>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -16,32 +16,16 @@ export function TransactionCard(props) {
             </tr>
           </thead>
           <tbody>
-            {/*TODO: each of these rows will need to be separated into one component with dynamic transaction data being passed */}
-            <tr>
-              <th scope="row">Title</th>
-              <td>Label</td>
-              <td>xxx</td>
-              <td><a className="text-secondary" href="/"><FontAwesomeIcon icon={faEye} /></a> <a className="text-danger"  href="/"><FontAwesomeIcon icon={faMinusCircle} /></a></td>
-    
-            </tr>
-            <tr>
-              <th scope="row">Title</th>
-              <td>Label</td>
-              <td>xxx</td>
-              <td><a className="text-secondary"  href="/"><FontAwesomeIcon icon={faEye} /></a> <a className="text-danger" href="/"><FontAwesomeIcon icon={faMinusCircle} /></a></td>
-     
-            </tr>
-            <tr>
-              <th scope="row">Title</th>
-              <td>Label</td>
-              <td>xxx</td>
-              <td><a  className="text-secondary" href="/"><FontAwesomeIcon icon={faEye} /></a> <a className="text-danger"  href="/"><FontAwesomeIcon icon={faMinusCircle} /></a></td>
-            
-            </tr>
+            {/*TODO: each transaction will be need to rendered dynamically 
+                     from a GET /transactions call, filtered on the specific 
+                     category card that the user is viewing */}
+            <TransactionRow></TransactionRow>
+            <TransactionRow></TransactionRow>
+            <TransactionRow></TransactionRow>
           </tbody>
         </table>
         <button type="button" className="btn btn-primary">
-          Button
+          Add Transaction
         </button>
       </div>
     </div>
