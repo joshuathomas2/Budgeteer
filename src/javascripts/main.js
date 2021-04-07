@@ -9,6 +9,9 @@ import {LoginForm} from './components/LoginForm';
 import {RegisterForm} from './components/RegisterForm';
 import {TransactionsCardList} from './components/TransactionsCardList';
 import {Home} from './components/Home';
+import {TransactionsCardList} from './components/TransactionsCardList'
+import {Home} from './components/Home'
+import {TransactionForm} from './components/TransactionForm'
 import 'bootstrap';
 
 if (document.getElementById('LoginForm')) {
@@ -19,4 +22,6 @@ if (document.getElementById('LoginForm')) {
     ReactDOM.render(<TransactionsCardList/>, document.getElementById('TransactionsCardList'))
 } else if (document.getElementById('main')) {
     ReactDOM.render(<Home/>, document.getElementById('main'))
+} else if (document.getElementById('TransactionForm')) {
+    ReactDOM.render(<TransactionForm/>, document.getElementById('TransactionForm'))
 }
