@@ -32,6 +32,11 @@ body {
   font-family: $font-family-sans-serif;
 }
 
+.b-border {
+  border-style: none none solid none;
+  border-bottom: solid 2px #05386b;
+}
+
 // NAVBAR STYLING
 .nav-item {
   color: #edf5e1;
