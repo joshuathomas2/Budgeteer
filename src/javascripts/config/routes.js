@@ -2,6 +2,11 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm} from '../controllers/index';
 import { loginUserAPI, registerUserAPI } from '../controllers/user';
+// import {allTransactionsAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
+// import {allCategoriesAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
+// import {allLabelsAPI, oneLabelAPI, createLabelsAPI, updateLabelsAPI, deleteLabelAPI} from '../controllers/label';
+
+
 import { APP_SECRET } from './vars';
 
 let router = express.Router();
@@ -21,7 +26,6 @@ export function configureRoutes(app) {
     router.get('/categories', categoriesListPage);
     router.get('/transactions', transactionsListPage);
     router.get('/transaction', transactionForm);
-    router.get('/transaction/:id', transactionForm);
 
     // Needs to have an id passed in to access specific resource TODO
     router.get('/category', categoryPage);
@@ -34,10 +38,29 @@ export function configureRoutes(app) {
     // API
     // TODO
 
-    //TRANSACTIONS
-    // router.post('/api/v1/transaction', createTransaction);
+    //TRANSACTIONS API
+    // router.get('/api/transactions', allTransactionsAPI)
+    // router.get('/api/transactions/:id', oneTransactionAPI)
+    // router.post('/api/transactions', createTransactionAPI)
+    // router.put('/api/transactions/:id', updateTransactionAPI)
+    // router.delete('/api/transactions/:id', deleteTransactionAPI)
 
-    // USERS
+    //CATEGORIES API
+    // router.get('/api/categories', allCategoriesAPI)
+    // router.get('/api/categories/:id', oneCategoryAPI)
+    // router.post('/api/categories', createCategoriesAPI)
+    // router.put('/api/categories/:id', updateCategoryAPI)
+    // router.delete('/api/categories/:id', deleteCategoryAPI)
+
+    //LABELS API
+    // router.get('/api/labels', allLabelsAPI)
+    // router.get('/api/labels/:id', oneLabelAPI)
+    // router.post('/api/labels', createLabelsAPI)
+    // router.put('/api/labels/:id', updateLabelsAPI)
+    // router.delete('/api/labels/:id', deleteLabelAPI)
+
+
+    // USERS API
     router.post('/api/v1/users/register', registerUserAPI);
     router.post('/api/v1/users/login', loginUserAPI);
 

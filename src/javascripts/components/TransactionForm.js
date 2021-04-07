@@ -55,7 +55,7 @@ export function TransactionForm(props) {
               value={values.label}
               onChange={handleChange}
             >
-              <option value="">Label</option>
+              <option value=""></option>
               <option value="">Label</option>
             
             </select>
