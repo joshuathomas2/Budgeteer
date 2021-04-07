@@ -4,7 +4,8 @@ import {TransactionCard} from './TransactionCard'
 export function TransactionsCardList(props) {
   return (
 
-    //TODO Render these cards dynamically according to how many transactions the current user_id has
+    //TODO Render cards dynamically based on results of a GET /categories api call. 
+    //I have 4 hard coded components for layout purposes
     <>
       <TransactionCard></TransactionCard>
       <TransactionCard></TransactionCard>

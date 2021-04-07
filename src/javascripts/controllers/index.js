@@ -20,9 +20,9 @@ export const transactionsListPage = (req, res, next) => {
     res.render('layout', {content: 'transactions_list'});
 } 
 
-export const transactionPage = (req, res, next) => {
-    res.render('layout', {content: 'transactions'});
-} 
+export const transactionForm = (req, res, next) => {
+    res.render('layout', {content: 'transaction_form'});
+}
 
 export const categoriesListPage = (req, res, next) => {
     res.render('layout', {content: 'categories'});

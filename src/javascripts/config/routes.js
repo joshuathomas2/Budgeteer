@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionPage, transactionsListPage} from '../controllers/index';
+import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm} from '../controllers/index';
 import { loginUserAPI, registerUserAPI } from '../controllers/user';
 import { APP_SECRET } from './vars';
 
@@ -20,10 +20,12 @@ export function configureRoutes(app) {
     router.get('/login', loginPage);
     router.get('/categories', categoriesListPage);
     router.get('/transactions', transactionsListPage);
-    
+    router.get('/transaction', transactionForm);
+    router.get('/transaction/:id', transactionForm);
+
     // Needs to have an id passed in to access specific resource TODO
     router.get('/category', categoryPage);
-    router.get('/transaction', transactionPage);
+    
 
     // How do we want to do this? Going to / should take a user to the homepage if signed in
     // and login page if not signed in? TODO
@@ -31,6 +33,9 @@ export function configureRoutes(app) {
 
     // API
     // TODO
+
+    //TRANSACTIONS
+    // router.post('/api/v1/transaction', createTransaction);
 
     // USERS
     router.post('/api/v1/users/register', registerUserAPI);
