@@ -48,6 +48,18 @@ export function TransactionForm(props) {
                 name="notes"
             />
 
+            <select
+              className= "form-control mb-4 bg-info input-shadow"
+              id="type"
+              name="label"
+              value={values.label}
+              onChange={handleChange}
+            >
+              <option value="">Label</option>
+              <option value="">Label</option>
+            
+            </select>
+
             <input
                 type="number"
                 className="form-control mb-4 bg-info input-shadow"

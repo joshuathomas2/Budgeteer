@@ -24,7 +24,7 @@ export function TransactionCard(props) {
             <TransactionRow></TransactionRow>
           </tbody>
         </table>
-        <a href="/transaction/new" className="btn btn-primary">
+        <a href="/transaction" className="btn btn-primary">
           Add Transaction
         </a>
       </div>
