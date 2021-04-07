@@ -2,20 +2,39 @@ import React from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-export function RegisterForm(props) {
-    return (
-        //label picker: dropdown? 
-        //title: text field 
-        //notes: text area 
-        //amount: text, numbers
+const validationSchema = yup.object({
+    title: yup.string().required(),
+    notes: yup.string().required(),
+    amount: yup.number().required().min(0),
+    label: yup.string().required()
+  })
 
+
+export function TransactionForm(props) {
+
+    const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
+        initialValues:  {
+          title: "",
+          notes: "",
+          amount: 0,
+          label: ""
+     
+        } , 
+        validationSchema,
+        onSubmit(values){
+        }
+        })
+    
+
+    return (
+        //to be addedlabel picker: dropdown? 
         <form class="text-center p-5" action="#!">
             <h2 class="mb-4 font-weight-bold text-secondary">Add Transaction</h2>
 
             <input
                 type="text"
                 class="form-control mb-4 bg-info input-shadow"
-                placeholder="title"
+                placeholder="Title"
                 value={values.title}
                 onChange={handleChange}
                 name="title"
@@ -28,6 +47,18 @@ export function RegisterForm(props) {
                 onChange={handleChange}
                 name="notes"
             />
+
+            <select
+              className= "form-control mb-4 bg-info input-shadow"
+              id="type"
+              name="label"
+              value={values.label}
+              onChange={handleChange}
+            >
+              <option value="">Label</option>
+              <option value="">Label</option>
+            
+            </select>
 
             <input
                 type="number"
