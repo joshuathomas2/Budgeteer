@@ -4,14 +4,18 @@ const Schema = mongoose.Schema;
 
 let categorySchema = new Schema({
     user_id: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId, ref:'users'
     },
     name: {
-        type: String,
+        type: String
     },
-    labels: {
-        type: Array
+    created_date: {
+        type: Date
+    },
+    modified_date: {
+        type: Date
     }
+    
 })
 
 

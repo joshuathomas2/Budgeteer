@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 
 let labelSchema = new Schema({
     user_id: {
-        type: Number
+        type: mongoose.Schema.Types.ObjectId, ref:'users'
     },
     category_id: {
-        type: Number
+        type: mongoose.Schema.Types.ObjectId, ref:'categories'
     },
     name: {
         type: String
@@ -25,8 +25,15 @@ let labelSchema = new Schema({
         type: Date
     },
     notes: {
-        type: Array
+        type: String,
+    },
+    created_date: {
+        type: Date,
+    },
+    modified_date: {
+        type: Date
     }
+    
 })
 
 export let Label = mongoose.model('Label', labelSchema);
