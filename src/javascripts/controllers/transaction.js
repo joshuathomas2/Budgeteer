@@ -6,7 +6,7 @@ export const allTransactionsAPI = (req, res, next) => {
             res.json({success: false, message: 'allTransactionsAPI query failed'});
             res.end();
         } else {
-            res.json(JSON.stringify(transactions));
+            res.json(transactions);
             res.end();
         }
     })
@@ -20,7 +20,7 @@ export const oneTransactionAPI = (req, res, next) => {
             res.json({success: false, message: 'oneTransactionAPI failed'});
             res.end();
         } else {
-            res.json({transaction: JSON.stringify(transaction), success: true, message: 'oneTransactionAPI passed'});
+            res.json({transaction, success: true, message: 'oneTransactionAPI passed'});
             res.end();
         }
     })
@@ -35,10 +35,13 @@ export const createTransactionAPI = (req, res, next) => {
     transaction.title = req.body.title_id;
     transaction.notes = req.body.notes;
     transaction.amount = req.body.amount;
+    transaction.created_date = new Date;
+    transaction.modified_date = new Date;
 
     transaction.save(err => {
         if (err) {
-            res.json({success: false, message: 'createTransactioAPI failed'});
+            console.log(err);
+            res.json({success: false, message: 'createTransactionAPI failed'});
             res.end();
         } else {
             res.json({success: true, message: 'createTransactionAPI passed'});
@@ -50,7 +53,9 @@ export const createTransactionAPI = (req, res, next) => {
 export const updateTransactionAPI = (req, res, next) => {
     const transactionID = req.params.transactionID;
 
-    Transaction.find({_id: transactionID}).exec((err, transaction) => {
+    console.log(transactionID, req.body);
+
+    Transaction.findOne({_id: transactionID}).exec((err, transaction) => {
         Transaction.updateOne({_id: transactionID}, {
             user_id: req.body.user_id ? req.body.user_id : transaction.user_id,
             category_id: req.body.category_id ? req.body.category_id : transaction.category_id,
@@ -60,6 +65,7 @@ export const updateTransactionAPI = (req, res, next) => {
             amount: req.body.amount ? req.body.amount : transaction.amount
         }, err => {
             if (err) {
+                console.log(err);
                 res.json({success: false, message: 'updateTransactionAPI failed'});
                 res.end();
             } else {

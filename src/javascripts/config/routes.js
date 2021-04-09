@@ -42,8 +42,8 @@ export function configureRoutes(app) {
     router.get('/api/v1/transactions', allTransactionsAPI)
     router.get('/api/v1/transactions/:transactionID', oneTransactionAPI)
     router.post('/api/v1/transactions', createTransactionAPI)
-    router.put('/api/v1/transactions/:id', updateTransactionAPI)
-    router.delete('/api/v1/transactions/:id', deleteTransactionAPI)
+    router.put('/api/v1/transactions/:transactionID', updateTransactionAPI)
+    router.delete('/api/v1/transactions/:transactionID', deleteTransactionAPI)
 
     //CATEGORIES API
     // router.get('/api/categories', allCategoriesAPI)
