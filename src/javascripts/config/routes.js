@@ -4,7 +4,7 @@ import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, tra
 import { loginUserAPI, registerUserAPI } from '../controllers/user';
 import {allTransactionsAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
 // import {allCategoriesAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
-// import {allLabelsAPI, oneLabelAPI, createLabelsAPI, updateLabelsAPI, deleteLabelAPI} from '../controllers/label';
+import {allLabelsAPI, oneLabelAPI, createLabelAPI, updateLabelAPI, deleteLabelAPI} from '../controllers/label';
 
 
 import { APP_SECRET } from './vars';
@@ -39,11 +39,11 @@ export function configureRoutes(app) {
     // TODO
 
     //TRANSACTIONS API
-    router.get('/api/v1/transactions', allTransactionsAPI)
-    router.get('/api/v1/transactions/:transactionID', oneTransactionAPI)
-    router.post('/api/v1/transactions', createTransactionAPI)
-    router.put('/api/v1/transactions/:transactionID', updateTransactionAPI)
-    router.delete('/api/v1/transactions/:transactionID', deleteTransactionAPI)
+    router.get('/api/v1/transactions', allTransactionsAPI);
+    router.get('/api/v1/transactions/:transactionID', oneTransactionAPI);
+    router.post('/api/v1/transactions', createTransactionAPI);
+    router.put('/api/v1/transactions/:transactionID', updateTransactionAPI);
+    router.delete('/api/v1/transactions/:transactionID', deleteTransactionAPI);
 
     //CATEGORIES API
     // router.get('/api/categories', allCategoriesAPI)
@@ -53,11 +53,11 @@ export function configureRoutes(app) {
     // router.delete('/api/categories/:id', deleteCategoryAPI)
 
     //LABELS API
-    // router.get('/api/labels', allLabelsAPI)
-    // router.get('/api/labels/:id', oneLabelAPI)
-    // router.post('/api/labels', createLabelsAPI)
-    // router.put('/api/labels/:id', updateLabelsAPI)
-    // router.delete('/api/labels/:id', deleteLabelAPI)
+    router.get('/api/labels', allLabelsAPI);
+    router.get('/api/labels/:labelID', oneLabelAPI);
+    router.post('/api/labels', createLabelAPI);
+    router.put('/api/labels/:labelID', updateLabelAPI);
+    router.delete('/api/labels/:labelID', deleteLabelAPI);
 
 
     // USERS API
