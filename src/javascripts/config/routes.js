@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm} from '../controllers/index';
-import { loginUserAPI, registerUserAPI } from '../controllers/user';
+import { loginUserAPI, registerUserAPI, getCurrentUserAPI } from '../controllers/user';
 import {allTransactionsAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
 import {allCategoriesAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
 import {allLabelsAPI, oneLabelAPI, createLabelAPI, updateLabelAPI, deleteLabelAPI} from '../controllers/label';
@@ -63,6 +63,7 @@ export function configureRoutes(app) {
     // USERS API
     router.post('/api/v1/users/register', registerUserAPI);
     router.post('/api/v1/users/login', loginUserAPI);
+    router.get('/api/v1/users/getCurrentUser', getCurrentUserAPI);
 
     app.use('/', router);
 }

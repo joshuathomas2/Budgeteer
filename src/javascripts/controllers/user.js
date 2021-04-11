@@ -2,6 +2,7 @@
 
 import passport from 'passport';
 import {User} from '../models/User';
+import {getCurrentUserByToken} from '../config/routes';
 
 export const registerUserAPI = (req, res, next) => {
 
@@ -20,6 +21,25 @@ export const registerUserAPI = (req, res, next) => {
         } else {
             res.json({success: true, message: 'User registration successful'})
             res.end();
+        }
+    })
+}
+
+export const getCurrentUserAPI = (req, res, next) => {
+    const decodedToken = getCurrentUserByToken(req.cookies.token);
+
+    User.findOne({_id: decodedToken._id}, (err, user) => {
+        if (err) {
+            res.status(404).json(err);
+            res.end();
+        } else {
+            if (user) {
+                res.json({success: true, message: 'getCurrentUser passed', user});
+                res.end();
+            } else {
+                res.json({success: false, message: 'getCurrentUser failed'});
+                res.end();
+            }
         }
     })
 }
