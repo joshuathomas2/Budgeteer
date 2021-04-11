@@ -8,7 +8,7 @@ import { labelData } from './src/javascripts/config/db/labelData';
 import { transactionData } from './src/javascripts/config/db/transactionData';
 import { User } from './src/javascripts/models/User';
 import { Category } from './src/javascripts/models/Category';
-import { Label } from './src/javascripts/models/label';
+import { Label } from './src/javascripts/models/Label';
 import { Transaction } from './src/javascripts/models/Transaction';
 
 let createError = require('http-errors');

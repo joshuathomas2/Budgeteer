@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm} from '../controllers/index';
 import { loginUserAPI, registerUserAPI } from '../controllers/user';
 import {allTransactionsAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
-// import {allCategoriesAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
+import {allCategoriesAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
 import {allLabelsAPI, oneLabelAPI, createLabelAPI, updateLabelAPI, deleteLabelAPI} from '../controllers/label';
 
 
@@ -46,11 +46,11 @@ export function configureRoutes(app) {
     router.delete('/api/v1/transactions/:transactionID', deleteTransactionAPI);
 
     //CATEGORIES API
-    // router.get('/api/categories', allCategoriesAPI)
-    // router.get('/api/categories/:id', oneCategoryAPI)
-    // router.post('/api/categories', createCategoriesAPI)
-    // router.put('/api/categories/:id', updateCategoryAPI)
-    // router.delete('/api/categories/:id', deleteCategoryAPI)
+    router.get('/api/v1/categories', allCategoriesAPI)
+    router.get('/api/v1/categories/:categoryID', oneCategoryAPI)
+    router.post('/api/v1/categories', createCategoriesAPI)
+    router.put('/api/v1/categories/:categoryID', updateCategoryAPI)
+    router.delete('/api/v1/categories/:categoryID', deleteCategoryAPI)
 
     //LABELS API
     router.get('/api/labels', allLabelsAPI);
