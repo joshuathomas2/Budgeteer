@@ -34,10 +34,10 @@ export const getCurrentUserAPI = (req, res, next) => {
             res.end();
         } else {
             if (user) {
-                res.json({success: true, message: 'getCurrentUser passed', user});
+                res.status(200).json(user);
                 res.end();
             } else {
-                res.json({success: false, message: 'getCurrentUser failed'});
+                res.status(404);
                 res.end();
             }
         }

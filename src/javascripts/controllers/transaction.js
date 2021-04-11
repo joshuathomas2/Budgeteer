@@ -7,10 +7,10 @@ export const allTransactionsAPI = (req, res, next) => {
 
     Transaction.find({user_id: userID}).exec((err, transactions) => {
         if (err) {
-            res.json({success: false, message: 'allTransactionsAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({transactions, success: true, message: 'allTransactionsAPI passed'});
+            res.status(200).json(transactions);
             res.end();
         }
     })
@@ -21,10 +21,10 @@ export const oneTransactionAPI = (req, res, next) => {
 
     Transaction.find({_id: transactionID}).exec((err, transaction) => {
         if (err) {
-            res.json({success: false, message: 'oneTransactionAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({transaction, success: true, message: 'oneTransactionAPI passed'});
+            res.status(200).json(transaction);
             res.end();
         }
     })
@@ -44,10 +44,10 @@ export const createTransactionAPI = (req, res, next) => {
 
     transaction.save(err => {
         if (err) {
-            res.json({success: false, message: 'createTransactionAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({success: true, message: 'createTransactionAPI passed'});
+            res.status(200);
             res.end();
         }
     })
@@ -66,11 +66,10 @@ export const updateTransactionAPI = (req, res, next) => {
             amount: req.body.amount ? req.body.amount : transaction.amount
         }, err => {
             if (err) {
-                console.log(err);
-                res.json({success: false, message: 'updateTransactionAPI failed', err});
+                res.status(404);
                 res.end();
             } else {
-                res.json({success: true, message: 'updateTransactionAPI passed'})
+                res.status(200);
                 res.end();
             }
         })
@@ -82,10 +81,10 @@ export const deleteTransactionAPI = (req, res, next) => {
 
     Transaction.deleteOne({_id: transactionID}, err => {
         if (err) {
-            res.json({success: false, message: 'deleteTransactionAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({success: true, message: 'deleteTransactionAPI passed'})
+            res.status(200);
             res.end();
         }
     })
