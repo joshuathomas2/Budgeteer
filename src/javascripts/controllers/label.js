@@ -1,7 +1,10 @@
 import {Label} from '../models/Label';
 
 export const allLabelsAPI = (req, res, next) => {
-    Label.find().exec((err, labels) => {
+
+    const userID = req.params.userID; 
+
+    Label.find({user_id: userID}).exec((err, labels) => {
         if (err) {
             res.json({success: false, message: 'allLabelsAPI failed'});
             res.end();

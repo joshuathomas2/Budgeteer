@@ -1,7 +1,10 @@
 import {Category} from '../models/Category'
 
 export const allCategoriesAPI = (req, res, next) => {
-    Category.find().exec((err, categories) => {
+
+    const userID = req.params.userID; 
+
+    Category.find({user_id: userID}).exec((err, categories) => {
         if (err) {
             res.json({success: false, message: 'allCategoriesAPI failed', err});
             res.end();
