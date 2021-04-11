@@ -1,7 +1,11 @@
+import { getCurrentUserByToken } from '../config/routes';
 import {Transaction} from '../models/Transaction';
 
 export const allTransactionsAPI = (req, res, next) => {
-    Transaction.find().exec((err, transactions) => {
+
+    const userID = req.params.userID; 
+
+    Transaction.find({user_id: userID}).exec((err, transactions) => {
         if (err) {
             res.json({success: false, message: 'allTransactionsAPI failed', err});
             res.end();

@@ -26,7 +26,7 @@ export function TransactionsCardList(props) {
    
       <CategoryContext.Provider value={{categories, setCategories}}>
      
-    </CategoryContext.Provider>
+      </CategoryContext.Provider>
     
 
 

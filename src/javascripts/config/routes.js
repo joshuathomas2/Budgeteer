@@ -39,21 +39,21 @@ export function configureRoutes(app) {
     // TODO
 
     //TRANSACTIONS API
-    router.get('/api/v1/transactions', allTransactionsAPI);
+    router.get('/api/v1/transactions/:userID', allTransactionsAPI);
     router.get('/api/v1/transactions/:transactionID', oneTransactionAPI);
     router.post('/api/v1/transactions', createTransactionAPI);
     router.put('/api/v1/transactions/:transactionID', updateTransactionAPI);
     router.delete('/api/v1/transactions/:transactionID', deleteTransactionAPI);
 
     //CATEGORIES API
-    router.get('/api/v1/categories', allCategoriesAPI)
+    router.get('/api/v1/categories/:userID', allCategoriesAPI)
     router.get('/api/v1/categories/:categoryID', oneCategoryAPI)
     router.post('/api/v1/categories', createCategoriesAPI)
     router.put('/api/v1/categories/:categoryID', updateCategoryAPI)
     router.delete('/api/v1/categories/:categoryID', deleteCategoryAPI)
 
     //LABELS API
-    router.get('/api/labels', allLabelsAPI);
+    router.get('/api/labels/:userID', allLabelsAPI);
     router.get('/api/labels/:labelID', oneLabelAPI);
     router.post('/api/labels', createLabelAPI);
     router.put('/api/labels/:labelID', updateLabelAPI);
