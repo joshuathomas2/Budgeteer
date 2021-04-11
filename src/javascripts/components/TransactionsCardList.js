@@ -1,23 +1,42 @@
 import React, { useState, createContext, useEffect} from "react";
 import {TransactionCard} from './TransactionCard'
+import { useCookies } from 'react-cookie'
 
 
 export const CategoryContext = createContext() 
 
 export function TransactionsCardList(props) {
   const [categories, setCategories] = useState()
+  const [cookies, setCookie, removeCookie] = useCookies(['token'])
+  const [userID, setUserID] = useState()
 
   useEffect(() => {
-    if(!categories) {
-      fetch('/api/v1/categories', {
-        credentials: "same-origin"
-      })
-       .then(response => response.text())
-       .then(data => {
-         console.log(data)
-         setCategories(JSON.parse(data.categories))
-       })
-    }
+
+    fetch('/api/v1/users/getCurrentUser', {
+      credentials: "same-origin"
+    })
+    .then(response => response.text())
+    .then(data => {
+      const user = JSON.parse(data)
+      setUserID(user._id)
+      console.log("UserID: " + userID)
+    })
+  
+  })
+
+  useEffect(() => {
+    if(userID) {
+      if(!categories) {
+        fetch(`/api/v1/categories/${userID}`, {
+          credentials: "same-origin"
+        })
+         .then(response => response.text())
+         .then(data => {
+           console.log(data)
+         })
+      }
+    } 
+  
   })
 
   return (
@@ -25,7 +44,7 @@ export function TransactionsCardList(props) {
       //I have 4 hard coded components for layout purposes
    
       <CategoryContext.Provider value={{categories, setCategories}}>
-     
+    
       </CategoryContext.Provider>
     
 

@@ -6,10 +6,10 @@ export const allCategoriesAPI = (req, res, next) => {
 
     Category.find({user_id: userID}).exec((err, categories) => {
         if (err) {
-            res.json({success: false, message: 'allCategoriesAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({categories, success: true, message: 'allCategoriesAPI passed'});
+            res.status(200).json(categories);
             res.end();
         }
     })
@@ -20,10 +20,10 @@ export const oneCategoryAPI = (req, res, next) => {
 
     Category.find({_id: categoryID}).exec((err, category) => {
         if (err) {
-            res.json({success: false, message: 'oneCategoryAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({category, success: true, message: 'oneCategoryAPI passed'});
+            res.status(200).json(category);
             res.end();
         }
     })
@@ -39,10 +39,10 @@ export const createCategoriesAPI = (req, res, next) => {
 
     category.save(err => {
         if (err) {
-            res.json({success: false, message: 'createCategoryAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({success: true, message: 'createCategoryAPI passed'});
+            res.status(200);
             res.end();
         }
     })
@@ -59,10 +59,10 @@ export const updateCategoryAPI = (req, res, next) => {
         }, err => {
             if (err) {
                 console.log(err);
-                res.json({success: false, message: 'updateCategoryAPI failed', err});
+                res.status(404);
                 res.end();
             } else {
-                res.json({success: true, message: 'updateCateogryAPI passed'})
+                res.status(200);
                 res.end();
             }
         })
@@ -74,10 +74,10 @@ export const deleteCategoryAPI = (req, res, next) => {
 
     Category.deleteOne({_id: categoryID}, err => {
         if (err) {
-            res.json({success: false, message: 'deleteCategoryAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({success: true, message: 'deleteCategoryAPI passed'})
+            res.status(200)
             res.end();
         }
     })

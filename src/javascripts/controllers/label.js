@@ -1,15 +1,12 @@
 import {Label} from '../models/Label';
 
 export const allLabelsAPI = (req, res, next) => {
-
-    const userID = req.params.userID; 
-
-    Label.find({user_id: userID}).exec((err, labels) => {
+    Label.find().exec((err, labels) => {
         if (err) {
-            res.json({success: false, message: 'allLabelsAPI failed'});
+            res.status(404);
             res.end();
         } else {
-            res.json({labels, success: true, message: 'allLabelsAPI passed'})
+            res.json({labels});
         }
     })
 }
@@ -19,10 +16,10 @@ export const oneLabelAPI = (req, res, next) => {
 
     Label.find({_id: labelID}).exec((err, label) => {
         if (err) {
-            res.json({success: false, message: 'oneLabelAPI failed'});
+            res.status(404);
             res.end();
         } else {
-            res.json({label, success: true, message: 'oneLabelAPI passed'});
+            res.json({label});
             res.end();
         }
     })
@@ -44,10 +41,10 @@ export const createLabelAPI = (req, res, next) => {
 
     label.save(err => {
         if (err) {
-            res.json({success: false, message: 'createLabelAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({success: true, message: 'createLabelAPI passed'});
+            res.status(200);
             res.end();
         }
     })
@@ -69,11 +66,10 @@ export const updateLabelAPI = (req, res, next) => {
             modified_date: new Date
         }, err => {
             if (err) {
-                console.log(err);
-                res.json({success: false, message: 'updateLabelAPI failed', err});
+                res.status(404);
                 res.end();
             } else {
-                res.json({success: true, message: 'updateLabelAPI passed'})
+                res.status(200);
                 res.end();
             }
         })
@@ -85,10 +81,10 @@ export const deleteLabelAPI = (req, res, next) => {
 
     Label.deleteOne({_id: labelID}, err => {
         if (err) {
-            res.json({success: false, message: 'deleteLabelAPI failed', err});
+            res.status(404);
             res.end();
         } else {
-            res.json({success: true, message: 'deleteLabelAPI passed'})
+            res.status(200);
             res.end();
         }
     })
