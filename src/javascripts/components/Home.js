@@ -3,39 +3,39 @@ import React from 'react';
 export function Home(props) {
 	return (
 		<>
-			<header class="jumbotron my-4 bg-light">
-				<h1 class="display-3 text-secondary text-center">Welcome, User</h1>
-				<div class="row">
-					<div class="col-6">
+			<header className="jumbotron my-4 bg-light">
+				<h1 className="display-3 text-secondary text-center">Welcome, User</h1>
+				<div className="row">
+					<div className="col-6">
 						<p>Graph 1</p>
 					</div>
-					<div class="col-6">
+					<div className="col-6">
 						<p>Graph 2</p>
 					</div>
 				</div>
 			</header>
-			<section id="home-info" class="bg-light mb-5">
-				<div class="row">
-					<div class="col-1">
+			<section id="home-info" className="bg-light mb-5">
+				<div className="row">
+					<div className="col-1">
 					</div>
-					<div class="col-3 mx-3 mb-5">
-						<a href="#"><h3 class="text-center text-secondary mb-5">Categories</h3></a>
-						<div class="list-group text-center">
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light">Cras justo odio</a>
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light">Dapibus ac facilisis in</a>
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light">Morbi leo risus</a>
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light">Porta ac consectetur ac</a>
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light">Vestibulum at eros</a>
+					<div className="col-3 mx-3 mb-5">
+						<a href="#"><h3 className="text-center text-secondary mb-5">Categories</h3></a>
+						<div className="list-group text-center">
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Cras justo odio</a>
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Dapibus ac facilisis in</a>
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Morbi leo risus</a>
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Porta ac consectetur ac</a>
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Vestibulum at eros</a>
 						</div>
 					</div>
-					<div class="col-7 mr-5 mb-5">
-						<a href="#"><h3 class="text-center text-secondary mb-5">Recent Transactions</h3></a>
-						<div class="list-group">
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light"> Cras justo odio</a>
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light">Dapibus ac facilisis in</a>
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light">Morbi leo risus</a>
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light">Porta ac consectetur ac</a>
-							<a href="#" class="list-group-item list-group-item-action b-border bg-light">Vestibulum at eros</a>
+					<div className="col-7 mr-5 mb-5">
+						<a href="#"><h3 className="text-center text-secondary mb-5">Recent Transactions</h3></a>
+						<div className="list-group">
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light"> Cras justo odio</a>
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Dapibus ac facilisis in</a>
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Morbi leo risus</a>
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Porta ac consectetur ac</a>
+							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Vestibulum at eros</a>
 						</div>
 					</div>
 				</div>
