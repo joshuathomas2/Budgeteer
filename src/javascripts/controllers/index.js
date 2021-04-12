@@ -25,7 +25,7 @@ export const transactionForm = (req, res, next) => {
 }
 
 export const categoriesListPage = (req, res, next) => {
-    res.render('layout', {content: 'categories'});
+    res.render('layout', {content: 'categories_list'});
 } 
 
 export const categoryPage = (req, res, next) => {
