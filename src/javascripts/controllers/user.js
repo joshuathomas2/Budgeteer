@@ -25,23 +25,36 @@ export const registerUserAPI = (req, res, next) => {
     })
 }
 
-export const getCurrentUserAPI = (req, res, next) => {
+export const getCurrentUserIdAPI = (req, res, next) => {
     const decodedToken = getCurrentUserByToken(req.cookies.token);
+    
+    if (decodedToken) {
+        const user_id = decodedToken._id;
 
-    User.findOne({_id: decodedToken._id}, (err, user) => {
-        if (err) {
-            res.status(404).json(err);
-            res.end();
-        } else {
-            if (user) {
-                res.status(200).json(user);
-                res.end();
-            } else {
-                res.status(404);
-                res.end();
-            }
-        }
-    })
+        res.status(200).json(user_id);
+        res.end();
+    } else {
+        res.status(404);
+        res.end();
+    }
+
+    // Below is old method of getting the user id, I think it revealed too much info
+    // to the client so I commented it out and did the above version instead.
+
+    // User.findOne({_id: decodedToken._id}, (err, user) => {
+    //     if (err) {
+    //         res.status(404).json(err);
+    //         res.end();
+    //     } else {
+    //         if (user) {
+    //             res.status(200).json(user);
+    //             res.end();
+    //         } else {
+    //             res.status(404);
+    //             res.end();
+    //         }
+    //     }
+    // })
 }
 
 export const loginUserAPI = (req, res, next) => {
