@@ -11,6 +11,7 @@ import {TransactionsCardList} from './components/TransactionsCardList';
 import {Home} from './components/Home';
 import {TransactionForm} from './components/TransactionForm';
 import {CategoriesList} from './components/CategoriesList';
+import {Category} from './components/Category';
 import 'bootstrap';
 
 if (document.getElementById('LoginForm')) {
@@ -25,4 +26,6 @@ if (document.getElementById('LoginForm')) {
     ReactDOM.render(<TransactionForm/>, document.getElementById('TransactionForm'))
 } else if (document.getElementById('categories_list')) {
     ReactDOM.render(<CategoriesList/>, document.getElementById('categories_list'))
+} else if (document.getElementById('category')) {
+    ReactDOM.render(<Category/>, document.getElementById('category'))
 }
