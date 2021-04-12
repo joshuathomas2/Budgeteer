@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect} from "react";
 import {TransactionCard} from './TransactionCard'
 import { useCookies } from 'react-cookie'
 import { set } from "mongoose";
+import { Transaction } from "../models/Transaction";
 
 
 export const CategoryContext = createContext() 
@@ -44,12 +45,12 @@ export function TransactionsCardList(props) {
   return (
       //TODO Render cards dynamically based on results of a GET /categories api call. 
       //I have 4 hard coded components for layout purposes
-   
-      <CategoryContext.Provider value={{categories, setCategories}}>
-    
-      </CategoryContext.Provider>
-    
-
+   <>
+      <TransactionCard/>
+      <TransactionCard/>
+      <TransactionCard/>
+      <TransactionCard/>
+  </>
 
     );
 }
