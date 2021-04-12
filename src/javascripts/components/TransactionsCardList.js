@@ -1,6 +1,7 @@
 import React, { useState, createContext, useEffect} from "react";
 import {TransactionCard} from './TransactionCard'
 import { useCookies } from 'react-cookie'
+import { set } from "mongoose";
 
 
 export const CategoryContext = createContext() 
@@ -11,17 +12,17 @@ export function TransactionsCardList(props) {
   const [userID, setUserID] = useState()
 
   useEffect(() => {
-
-    fetch('/api/v1/users/getCurrentUser', {
-      credentials: "same-origin"
-    })
-    .then(response => response.text())
-    .then(data => {
-      const user = JSON.parse(data)
-      setUserID(user._id)
-      console.log("UserID: " + userID)
-    })
-  
+    if (!userID) {
+      fetch('/api/v1/users/getCurrentUser', {
+        credentials: "same-origin"
+      })
+      .then(response => response.text())
+      .then(data => {
+        const retrieved_id = JSON.parse(data);
+        setUserID(retrieved_id);
+        console.log(retrieved_id);
+      })
+    }
   })
 
   useEffect(() => {
@@ -32,11 +33,12 @@ export function TransactionsCardList(props) {
         })
          .then(response => response.text())
          .then(data => {
-           console.log(data)
+           const retrieved_categories = data;
+           setCategories(retrieved_categories);
+           console.log('Categories: ' + retrieved_categories);
          })
       }
     } 
-  
   })
 
   return (
