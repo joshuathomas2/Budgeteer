@@ -21,7 +21,6 @@ export function TransactionsCardList(props) {
       .then(data => {
         const retrieved_id = JSON.parse(data);
         setUserID(retrieved_id);
-        console.log(retrieved_id);
       })
     }
   })
@@ -34,9 +33,8 @@ export function TransactionsCardList(props) {
         })
          .then(response => response.text())
          .then(data => {
-           const retrieved_categories = data;
+           const retrieved_categories = JSON.parse(data);
            setCategories(retrieved_categories);
-           console.log('Categories: ' + retrieved_categories);
          })
       }
     } 
@@ -44,14 +42,15 @@ export function TransactionsCardList(props) {
 
   if (!categories){
     return (<span>loading...</span>)
-  } else {
+  } else {   
   return (
-    <div className="container">
-    {
-      categories.map(c => {
-        return <TransactionCard key={c.id} project={c}/>
-      })
-    } </div>
+    <div>
+      { 
+         categories.map(c => {
+          return <TransactionCard key={c.id} project={c}/>
+        })
+      }
+    </div>
     );
   }
 }
