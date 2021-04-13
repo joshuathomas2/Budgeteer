@@ -42,15 +42,16 @@ export function TransactionsCardList(props) {
     } 
   })
 
+  if (!categories){
+    return (<span>loading...</span>)
+  } else {
   return (
-      //TODO Render cards dynamically based on results of a GET /categories api call. 
-      //I have 4 hard coded components for layout purposes
-   <>
-      <TransactionCard/>
-      <TransactionCard/>
-      <TransactionCard/>
-      <TransactionCard/>
-  </>
-
+    <div className="container">
+    {
+      categories.map(c => {
+        return <TransactionCard key={c.id} project={c}/>
+      })
+    } </div>
     );
+  }
 }
