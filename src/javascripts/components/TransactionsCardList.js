@@ -29,7 +29,7 @@ export function TransactionsCardList(props) {
   useEffect(() => {
     if(userID) {
       if(!categories) {
-        fetch(`/api/v1/categories/${userID}`, {
+        fetch(`/api/v1/categories/user/${userID}`, {
           credentials: "same-origin"
         })
          .then(response => response.text())

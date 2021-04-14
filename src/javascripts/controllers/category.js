@@ -1,6 +1,6 @@
 import {Category} from '../models/Category'
 
-export const allCategoriesAPI = (req, res, next) => {
+export const allCategoriesByUserAPI = (req, res, next) => {
 
     const userID = req.params.userID; 
 
