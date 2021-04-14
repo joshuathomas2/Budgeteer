@@ -34,7 +34,7 @@ export function TransactionsCardList(props) {
         })
          .then(response => response.text())
          .then(data => {
-           const retrieved_categories = data;
+           const retrieved_categories = JSON.parse(data);
            setCategories(retrieved_categories);
            console.log('Categories: ' + retrieved_categories);
          })
@@ -43,13 +43,13 @@ export function TransactionsCardList(props) {
   })
 
   if (!categories){
-    return (<span>loading...</span>)
+    return (<span className="text-center">Loading data...</span>)
   } else {
   return (
     <div className="container">
     {
       categories.map(c => {
-        return <TransactionCard key={c.id} project={c}/>
+        return <TransactionCard key={c.id} category={c}/>
       })
     } </div>
     );

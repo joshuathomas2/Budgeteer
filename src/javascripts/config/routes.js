@@ -2,7 +2,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm} from '../controllers/index';
 import { loginUserAPI, registerUserAPI, getCurrentUserIdAPI } from '../controllers/user';
-import {allTransactionsAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
+import {allTransactionsAPI, allTransactionsByCategoryAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
 import {allCategoriesAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
 import {allLabelsAPI, oneLabelAPI, createLabelAPI, updateLabelAPI, deleteLabelAPI} from '../controllers/label';
 
@@ -40,6 +40,7 @@ export function configureRoutes(app) {
 
     //TRANSACTIONS API
     router.get('/api/v1/transactions/:userID', allTransactionsAPI);
+    router.get('/api/v1/transactionsByCategory/:categoryID', allTransactionsByCategoryAPI);
     router.get('/api/v1/transactions/:transactionID', oneTransactionAPI);
     router.post('/api/v1/transactions', createTransactionAPI);
     router.put('/api/v1/transactions/:transactionID', updateTransactionAPI);
@@ -47,14 +48,14 @@ export function configureRoutes(app) {
 
     //CATEGORIES API
     router.get('/api/v1/categories/:userID', allCategoriesAPI)
-    //router.get('/api/v1/categories/:categoryID', oneCategoryAPI)
+    //router.get('/api/v1/categoriesOne/:categoryID', oneCategoryAPI)
     router.post('/api/v1/categories', createCategoriesAPI)
     router.put('/api/v1/categories/:categoryID', updateCategoryAPI)
     router.delete('/api/v1/categories/:categoryID', deleteCategoryAPI)
 
     //LABELS API
     router.get('/api/labels/:userID', allLabelsAPI);
-    router.get('/api/labels/:labelID', oneLabelAPI);
+    router.get('/api/labelsOne/:labelID', oneLabelAPI);
     router.post('/api/labels', createLabelAPI);
     router.put('/api/labels/:labelID', updateLabelAPI);
     router.delete('/api/labels/:labelID', deleteLabelAPI);
