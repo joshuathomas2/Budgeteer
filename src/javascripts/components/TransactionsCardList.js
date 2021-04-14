@@ -21,7 +21,7 @@ export function TransactionsCardList(props) {
       .then(data => {
         const retrieved_id = JSON.parse(data);
         setUserID(retrieved_id);
-        console.log(retrieved_id);
+        //console.log(retrieved_id);
       })
     }
   })
@@ -29,14 +29,14 @@ export function TransactionsCardList(props) {
   useEffect(() => {
     if(userID) {
       if(!categories) {
-        fetch(`/api/v1/categories/${userID}`, {
+        fetch(`/api/v1/categories/user/${userID}`, {
           credentials: "same-origin"
         })
          .then(response => response.text())
          .then(data => {
            const retrieved_categories = JSON.parse(data);
            setCategories(retrieved_categories);
-           console.log('Categories: ' + retrieved_categories);
+           //console.log('Categories: ' + retrieved_categories);
          })
       }
     } 
@@ -49,7 +49,7 @@ export function TransactionsCardList(props) {
     <div className="container">
     {
       categories.map(c => {
-        return <TransactionCard key={c.id} category={c}/>
+        return <TransactionCard key={c._id} category={c}/>
       })
     } </div>
     );

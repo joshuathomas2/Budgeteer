@@ -1,5 +1,5 @@
 import {Transaction} from '../models/Transaction';
-export const allTransactionsAPI = (req, res, next) => {
+export const allTransactionsByUserAPI = (req, res, next) => {
 
     const userID = req.params.userID; 
 
@@ -17,7 +17,7 @@ export const allTransactionsAPI = (req, res, next) => {
 export const allTransactionsByCategoryAPI = (req, res, next) => {
 
     const categoryID = req.params.categoryID;
-    
+
     Transaction.find({category_id: categoryID}).exec((err, transactions) => {
         if (err) {
             res.status(404);
