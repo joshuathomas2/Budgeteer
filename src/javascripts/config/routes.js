@@ -41,7 +41,7 @@ export function configureRoutes(app) {
     //TRANSACTIONS API
     router.get('/api/v1/transactions/user/:userID', allTransactionsByUserAPI);
     router.get('/api/v1/transactions/categories/:categoryID', allTransactionsByCategoryAPI);
-    router.get('/api/v1/transactions/:transactionID', oneTransactionAPI);
+    router.get('/api/v1/transactions/one/:transactionID', oneTransactionAPI);
     router.post('/api/v1/transactions', createTransactionAPI);
     router.put('/api/v1/transactions/:transactionID', updateTransactionAPI);
     router.delete('/api/v1/transactions/:transactionID', deleteTransactionAPI);
@@ -54,11 +54,11 @@ export function configureRoutes(app) {
     router.delete('/api/v1/categories/:categoryID', deleteCategoryAPI)
 
     //LABELS API
-    router.get('/api/labels', allLabelsAPI);
-    router.get('/api/labels/one/:labelID', oneLabelAPI);
-    router.post('/api/labels', createLabelAPI);
-    router.put('/api/labels/:labelID', updateLabelAPI);
-    router.delete('/api/labels/:labelID', deleteLabelAPI);
+    router.get('/api/v1/labels', allLabelsAPI);
+    router.get('/api/v1/labels/one/:labelID', oneLabelAPI);
+    router.post('/api/v1/labels', createLabelAPI);
+    router.put('/api/v1/labels/:labelID', updateLabelAPI);
+    router.delete('/api/v1/labels/:labelID', deleteLabelAPI);
 
 
     // USERS API

@@ -6,7 +6,7 @@ export const allLabelsAPI = (req, res, next) => {
             res.status(404);
             res.end();
         } else {
-            res.json({labels});
+            res.status(200).res.json(labels);
         }
     })
 }
@@ -19,7 +19,7 @@ export const oneLabelAPI = (req, res, next) => {
             res.status(404);
             res.end();
         } else {
-            res.json({label});
+            res.status(200).json(label);
             res.end();
         }
     })
