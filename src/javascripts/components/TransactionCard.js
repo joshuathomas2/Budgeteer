@@ -2,10 +2,12 @@ import React from "react";
 import { TransactionRow } from './TransactionRow'
 
 export function TransactionCard(props) {
+  const c = props.category;
+
   return (
     <div className="card bg-info m-3">
       <div className="card-body">
-        <h5 className="card-title text-center">Category Title</h5>
+        <h5 className="card-title text-center">{ c.name }</h5>
         <table className="table table-striped">
           <thead>
             <tr>
