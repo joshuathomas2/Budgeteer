@@ -1,11 +1,24 @@
-import { getCurrentUserByToken } from '../config/routes';
 import {Transaction} from '../models/Transaction';
-
-export const allTransactionsAPI = (req, res, next) => {
+export const allTransactionsByUserAPI = (req, res, next) => {
 
     const userID = req.params.userID; 
 
     Transaction.find({user_id: userID}).exec((err, transactions) => {
+        if (err) {
+            res.status(404);
+            res.end();
+        } else {
+            res.status(200).json(transactions);
+            res.end();
+        }
+    })
+}
+
+export const allTransactionsByCategoryAPI = (req, res, next) => {
+
+    const categoryID = req.params.categoryID;
+
+    Transaction.find({category_id: categoryID}).exec((err, transactions) => {
         if (err) {
             res.status(404);
             res.end();
