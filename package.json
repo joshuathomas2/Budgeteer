@@ -6,7 +6,8 @@
   "scripts": {
     "deploy": "npx webpack",
     "start": "npx webpack serve",
-    "server": "nodemon --exec babel-node server.js"
+    "server": "nodemon --exec babel-node server.js",
+    "server:production": "NODE_ENV=production nodemon --exec babel-node server.js"
   },
   "repository": {
     "type": "git",
