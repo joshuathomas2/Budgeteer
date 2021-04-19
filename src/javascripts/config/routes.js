@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm} from '../controllers/index';
+import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm, categoryForm, labelForm} from '../controllers/index';
 import { loginUserAPI, registerUserAPI, getCurrentUserIdAPI } from '../controllers/user';
 import {allTransactionsByUserAPI, allTransactionsByCategoryAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
 import {allCategoriesByUserAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
@@ -25,7 +25,9 @@ export function configureRoutes(app) {
     router.get('/login', loginPage);
     router.get('/categories', categoriesListPage);
     router.get('/transactions', transactionsListPage);
-    router.get('/transaction', transactionForm);
+    router.get('/transaction/form', transactionForm);
+    router.get('/category/form', categoryForm);
+    router.get('/label/form', labelForm);
 
     // Needs to have an id passed in to access specific resource TODO
     router.get('/category', categoryPage);

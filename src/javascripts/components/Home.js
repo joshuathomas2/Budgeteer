@@ -55,18 +55,18 @@ export function Home(props) {
   if (!categories || !transactions){
     return (<span className="text-center">Loading data...</span>)
   } else {
-	//create a new array equal to transactions but only slice off the most recent 5 (last five items)
+	const lastFive = transactions.slice(-5);
 	return (
 		<>
 			<header className="jumbotron my-4 bg-light">
 				<h1 className="display-3 text-secondary text-center">Welcome, User</h1>
 				<div className="row">
-					<div className="col-6">
+					{/* <div className="col-6">
 						<p>Graph 1</p>
 					</div>
 					<div className="col-6">
 						<p>Graph 2</p>
-					</div>
+					</div> */}
 				</div>
 			</header>
 			<section id="home-info" className="bg-light mb-5">
@@ -87,7 +87,7 @@ export function Home(props) {
 						<a href="#"><h3 className="text-center text-secondary mb-5">Recent Transactions</h3></a>
 						<div className="list-group">
 							{
-								transactions.map(t => {
+								lastFive.map(t => {
 								return <HomeTransactionListItem key={t._id} transaction={t}/>
 								})
 							}
