@@ -17,7 +17,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
-connect('mongodb+srv://budgeteer:koltenjoshuajaythan@cluster0.sv6ly.mongodb.net/budgeteer?retryWrites=true&w=majority');
+connect('mongodb+srv://budgeteer:koltenjoshuajaythan@cluster0.sv6ly.mongodb.net/budgeteer?retryWrites=true&w=majority', {useNewUrlParser: true});
 
 export let app = express();
 
