@@ -48,7 +48,7 @@ export function configureRoutes(app) {
 
     //CATEGORIES API
     router.get('/api/v1/categories/user/:userID', allCategoriesByUserAPI)
-    //router.get('/api/v1/categories/one/:categoryID', oneCategoryAPI)
+    router.get('/api/v1/categories/one/:categoryID', oneCategoryAPI)
     router.post('/api/v1/categories', createCategoriesAPI)
     router.put('/api/v1/categories/:categoryID', updateCategoryAPI)
     router.delete('/api/v1/categories/:categoryID', deleteCategoryAPI)

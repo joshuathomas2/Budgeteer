@@ -29,5 +29,6 @@ export const categoriesListPage = (req, res, next) => {
 } 
 
 export const categoryPage = (req, res, next) => {
-    res.render('layout', {content: 'category'});
+
+    res.render('layout', {content: 'category'} );
 } 
