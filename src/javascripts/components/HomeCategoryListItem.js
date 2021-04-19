@@ -9,7 +9,7 @@ export function HomeCategoryListItem(props) {
     return <tr><td className="text-center">Loading data...</td></tr>
   } else {
     return (
-        <a href={ '/category?id=' + c._id  } className="list-group-item list-group-item-action b-border bg-light">{ c.name }</a>
+        <a href={ '/category?id=' + c._id  } className="list-group-item list-group-item-action b-border bg-light">{ c.name }</a> 
     );
 
   }

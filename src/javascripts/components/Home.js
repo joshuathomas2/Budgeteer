@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {HomeCategoryListItem} from './HomeCategoryListItem'
+import {HomeTransactionListItem} from './HomeTransactionListItem'
 import { useCookies } from 'react-cookie'
 
 export function Home(props) {
-	const [categories, setCategories] = useState()
+  const [categories, setCategories] = useState()
   const [cookies, setCookie, removeCookie] = useCookies(['token'])
   const [userID, setUserID] = useState()
+  const [transactions, setTransactions] = useState()
 
   useEffect(() => {
     if (!userID) {
@@ -16,7 +18,6 @@ export function Home(props) {
       .then(data => {
         const retrieved_id = JSON.parse(data);
         setUserID(retrieved_id);
-        //console.log(retrieved_id);
       })
     }
   })
@@ -31,15 +32,30 @@ export function Home(props) {
          .then(data => {
            const retrieved_categories = JSON.parse(data);
            setCategories(retrieved_categories);
-           //console.log('Categories: ' + retrieved_categories);
          })
       }
     } 
   })
 
-  if (!categories){
+  useEffect(() => {
+    if(userID) {
+      if(!transactions) {
+        fetch(`/api/v1/transactions/user/${userID}`, {
+          credentials: "same-origin"
+        })
+         .then(response => response.text())
+         .then(data => {
+           const retrieved_transactions = JSON.parse(data);
+           setTransactions(retrieved_transactions);
+         })
+      }
+    } 
+  })	
+
+  if (!categories || !transactions){
     return (<span className="text-center">Loading data...</span>)
   } else {
+	//create a new array equal to transactions but only slice off the most recent 5 (last five items)
 	return (
 		<>
 			<header className="jumbotron my-4 bg-light">
@@ -70,11 +86,11 @@ export function Home(props) {
 					<div className="col-7 mr-5 mb-5">
 						<a href="#"><h3 className="text-center text-secondary mb-5">Recent Transactions</h3></a>
 						<div className="list-group">
-							<a href="#" className="list-group-item list-group-item-action b-border bg-light"> Cras justo odio</a>
-							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Dapibus ac facilisis in</a>
-							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Morbi leo risus</a>
-							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Porta ac consectetur ac</a>
-							<a href="#" className="list-group-item list-group-item-action b-border bg-light">Vestibulum at eros</a>
+							{
+								transactions.map(t => {
+								return <HomeTransactionListItem key={t._id} transaction={t}/>
+								})
+							}
 						</div>
 					</div>
 				</div>
