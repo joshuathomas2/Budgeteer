@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 export function connect(uri) {
 
-    if (process.env.NODE_ENV === 'production') {
-        uri = process.env.MONGODB_URI;
-    }
+    // if (process.env.NODE_ENV === 'production') {
+    //     uri = process.env.MONGODB_URI;
+    // }
 
     mongoose.connect(uri, {
         useNewUrlParser: true,
