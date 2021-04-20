@@ -1,8 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import {HomeCategoryListItem} from './HomeCategoryListItem'
-import {HomeTransactionListItem} from './HomeTransactionListItem'
 import { useCookies } from 'react-cookie'
 
+export function HomeCategoryListItem(props) {
+  
+  const c = props.category;
+ 
+  if (!c) {
+    return <tr><td className="text-center">Loading data...</td></tr>
+  } else {
+    return (
+        <a href={ '/category?id=' + c._id  } className="list-group-item list-group-item-action b-border bg-light">{ c.name }</a> 
+    );
+
+  }
+  }
+  export function HomeTransactionListItem(props) {
+  
+    const t = props.transaction;
+   
+    if (!t) {
+      return <tr><td className="text-center">Loading data...</td></tr>
+    } else {
+      return (
+          <a href={ '/transactions' } className="list-group-item list-group-item-action b-border bg-light">{ t.title }</a> 
+      );
+  
+    }
+    }
+    
 export function Home(props) {
   const [categories, setCategories] = useState()
   const [cookies, setCookie, removeCookie] = useCookies(['token'])

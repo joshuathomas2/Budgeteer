@@ -11,6 +11,19 @@ export const allLabelsAPI = (req, res, next) => {
     })
 }
 
+export const allLabelsByCategoryAPI = (req, res, next) => {
+    const category_id = req.params.categoryID;
+
+    Label.find({category_id: category_id}).exec((err, labels) => {
+        if (err) {
+            res.status(404);
+            res.end();
+        } else {
+            res.status(200).json(labels);
+        }
+    })
+}
+
 export const oneLabelAPI = (req, res, next) => {
     const labelID = req.params.labelID;
 
@@ -89,3 +102,4 @@ export const deleteLabelAPI = (req, res, next) => {
         }
     })
 }
+
