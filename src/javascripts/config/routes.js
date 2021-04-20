@@ -28,17 +28,12 @@ export function configureRoutes(app) {
     router.get('/transaction/form', requireSignIn, transactionForm);
     router.get('/category/form', requireSignIn, categoryForm);
     router.get('/label/form', requireSignIn, labelForm);
+    router.get('/category', requireSignIn, categoryPage);
 
-    // Needs to have an id passed in to access specific resource TODO
-    router.get('/category', categoryPage);
     
-
     // How do we want to do this? Going to / should take a user to the homepage if signed in
     // and login page if not signed in? TODO
-    router.get('/', homePage);
-
-    // API
-    // TODO
+    router.get('/', requireSignIn, homePage);
 
     //TRANSACTIONS API
     router.get('/api/v1/transactions/user/:userID', allTransactionsByUserAPI);

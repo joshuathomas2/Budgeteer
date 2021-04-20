@@ -28,7 +28,7 @@ export const allTransactionsByCategoryAPI = (req, res, next) => {
             res.end();
         }
     })
-}
+}   
 
 
 
