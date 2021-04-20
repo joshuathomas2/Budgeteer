@@ -1,4 +1,5 @@
 import {Transaction} from '../models/Transaction';
+const { ObjectId } = require('mongodb')
 export const allTransactionsByUserAPI = (req, res, next) => {
 
     const userID = req.params.userID; 
@@ -45,6 +46,7 @@ export const oneTransactionAPI = (req, res, next) => {
 
 export const createTransactionAPI = (req, res, next) => {
     let transaction = new Transaction;
+
 
     transaction.user_id = req.body.user_id;
     transaction.category_id = req.body.category_id;

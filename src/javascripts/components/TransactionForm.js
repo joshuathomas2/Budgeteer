@@ -2,6 +2,7 @@ import React from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
+
 const validationSchema = yup.object({
     title: yup.string().required(),
     notes: yup.string().required(),
@@ -14,11 +15,12 @@ export function TransactionForm(props) {
 
     const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
         initialValues:  {
+          user_id: "", 
+          category_id:"",
+          label_id: "",
           title: "",
           notes: "",
           amount: 0,
-          label: ""
-     
         } , 
         validationSchema,
         onSubmit(values){
@@ -55,8 +57,10 @@ export function TransactionForm(props) {
               value={values.label}
               onChange={handleChange}
             >
+
+            {/* //implement a map function rather than the below option tags that dynamically shows all labels for the current category_id that the user is in  */}
               <option value=""></option>
-              <option value="">Label</option>
+              <option value=""></option>
             
             </select>
 
@@ -69,7 +73,7 @@ export function TransactionForm(props) {
                 name="amount"
             />
 
-            {/* implement a dropdown that shows options for all available labels for a user's category */}
+           
 
             <button class="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
                 Create
