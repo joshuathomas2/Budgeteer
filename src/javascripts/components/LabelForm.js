@@ -73,10 +73,10 @@ export function LabelForm(props) {
             />
 
             <div className="field mb-3">
-            <label htmlFor="due_date" className="form-label">Due Date</label>
+            
             <div className="input-group has-validation">
                 <div className={errors.due_date ? 'is-invalid' : ''}>
-                <DatePicker className={`form-control ${errors.due_date ? 'is-invalid' : ''}`} id="due_date" name="due_date" selected={values.due_date} onChange={date => setFieldValue('due_date', date)}/>
+                <DatePicker placeholderText="Due Date" className={`form-control ${errors.due_date ? 'is-invalid' : ''} bg-info`} id="due_date" name="due_date" selected={values.due_date} onChange={date => setFieldValue('due_date', date)}/>
                 </div>
             </div>
             </div>

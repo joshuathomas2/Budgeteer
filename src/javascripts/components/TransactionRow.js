@@ -33,7 +33,7 @@ export function TransactionRow(props) {
         <td> { label[0].name }</td>
         <td>{ t.amount }</td>
         <td>
-          <a className="text-secondary" href="/">
+          <a className="text-secondary" href={ '/transaction/form?id=' + t._id }>
             <FontAwesomeIcon icon={faEye} />
           </a>{" "}
           <a className="text-danger" href="/">

@@ -14,6 +14,7 @@ import {CategoriesList} from './components/CategoriesList';
 import {Category} from './components/Category';
 import {LabelForm} from './components/LabelForm'
 import {CategoryForm} from './components/CategoryForm'
+import {SignOut} from './components/SignOut'
 
 import 'bootstrap';
 
@@ -35,4 +36,12 @@ if (document.getElementById('LoginForm')) {
     ReactDOM.render(<LabelForm/>, document.getElementById('label_form'))
 } else if (document.getElementById('category_form')) {
     ReactDOM.render(<CategoryForm/>, document.getElementById('category_form'))
+}
+
+if(document.querySelector('#_sign_user_out')) {
+    document.querySelector('#_sign_user_out').onclick = (e) => {
+        let el = document.createElement('div')
+        document.body.appendChild(el)
+        ReactDOM.render(<SignOut/>,el)
+    }
 }

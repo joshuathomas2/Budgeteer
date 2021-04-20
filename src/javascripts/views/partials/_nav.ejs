@@ -17,6 +17,7 @@
   <!-- Navbar links -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav ml-auto">
+      <% if (signedIn) { %>
       <li class="nav-item">
         <a class="nav-link text-info font-weight-bold" href="#">Home</a>
       </li>
@@ -27,8 +28,13 @@
         <a class="nav-link text-info font-weight-bold" href="/transactions">Transactions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-info font-weight-bold" href="#">Settings</a>
+        <a id="_sign_user_out" class="nav-link text-info font-weight-bold">Sign Out</a>
       </li>
+      <% } else { %>
+      <li class="nav-item">
+        <a class="nav-link text-info font-weight-bold" href="/login">Sign In</a>
+      </li>
+      <% } %>
     </ul>
   </div>
 </nav>
