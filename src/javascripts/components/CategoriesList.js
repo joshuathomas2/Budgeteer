@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useCookies } from 'react-cookie'
+import { CategoriesListItem } from './CategoriesListItem';
 
 export function CategoriesList(props) {
   const [categories, setCategories] = useState()
@@ -38,7 +39,13 @@ export function CategoriesList(props) {
     return (<span className="text-center">Loading data...</span>)
   } else {
     return (
-        
-    )
+      <section id="categories" className="bg-light my-5">
+      <div className="row">
+        {categories.map((c) => {
+          return <CategoriesListItem key={c._id} category={c} />;
+        })}
+      </div>
+      </section>
+    );
 }
 }

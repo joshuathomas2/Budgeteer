@@ -69,13 +69,13 @@ export function Home(props) {
 					</div> */}
 				</div>
 			</header>
-			<section id="home-info" className="bg-light mb-5">
+			<section id="home-info" className="bg-light mb-3">
 				<div className="row">
 					<div className="col-1">
 					</div>
-					<div className="col-3 mx-3 mb-5">
-						<a href="#"><h3 className="text-center text-secondary mb-5">Categories</h3></a>
-						<div className="list-group text-center">
+					<div className="col-lg-3 col-sm-12 mb-5">
+						<a href="#"><h3 className="text-center text-secondary mb-3">Categories</h3></a>
+						<div className="list-group text-center p-3">
 						{
      					 	categories.map(c => {
         					return <HomeCategoryListItem key={c._id} category={c}/>
@@ -83,9 +83,9 @@ export function Home(props) {
     					}
 						</div>
 					</div>
-					<div className="col-7 mr-5 mb-5">
-						<a href="#"><h3 className="text-center text-secondary mb-5">Recent Transactions</h3></a>
-						<div className="list-group">
+					<div className="col-lg-7 col-sm-12 mb-5">
+						<a href="#"><h3 className="text-center text-secondary mb-3">Recent Transactions</h3></a>
+						<div className="list-group p-3">
 							{
 								lastFive.map(t => {
 								return <HomeTransactionListItem key={t._id} transaction={t}/>
