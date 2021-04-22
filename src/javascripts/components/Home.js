@@ -50,7 +50,7 @@ export function Home(props) {
   useEffect(() => {
     if(userID) {
       if(!categories) {
-        fetch(`/api/v1/categories/user/${userID}`, {
+        fetch(`/api/v1/categories/user/${userID.id}`, {
           credentials: "same-origin"
         })
          .then(response => response.text())
@@ -65,7 +65,7 @@ export function Home(props) {
   useEffect(() => {
     if(userID) {
       if(!transactions) {
-        fetch(`/api/v1/transactions/user/${userID}`, {
+        fetch(`/api/v1/transactions/user/${userID.id}`, {
           credentials: "same-origin"
         })
          .then(response => response.text())
@@ -84,7 +84,7 @@ export function Home(props) {
 	return (
 		<>
 			<header className="jumbotron my-4 bg-light">
-				<h1 className="display-3 text-secondary text-center">Welcome, User</h1>
+				<h1 className="display-3 text-secondary text-center">Welcome, {userID.username}!</h1>
 				<div className="row">
 					{/* <div className="col-6">
 						<p>Graph 1</p>

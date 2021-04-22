@@ -44,7 +44,7 @@ export function CategoriesList(props) {
   useEffect(() => {
     if(userID) {
       if(!categories) {
-        fetch(`/api/v1/categories/user/${userID}`, {
+        fetch(`/api/v1/categories/user/${userID.id}`, {
           credentials: "same-origin"
         })
          .then(response => response.text())
