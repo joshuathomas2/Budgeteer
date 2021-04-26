@@ -42,7 +42,7 @@ export function TransactionCard(props) {
                   </thead>
                   <tbody>
                     {transactions.map((t) => {
-                      return <TransactionRow key={t._id} transaction={t} />;
+                      return <TransactionRow key={t._id} transaction={t} category={c} />;
                     })}
                   </tbody>
                 </table>

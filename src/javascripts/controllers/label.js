@@ -24,6 +24,24 @@ export const allLabelsByCategoryAPI = (req, res, next) => {
     })
 }
 
+export const labelNamesByCategoryAPI = (req, res, next) => {
+    const category_id = req.params.categoryID;
+
+    Label.find({category_id: category_id}).exec((err, labels) => {
+        if (err) {
+            res.status(404);
+            res.end();
+        } else {
+            var labelNames = [];
+            for (let i = 0; i < labels.length; i++) {
+                labelNames[i] = labels[0].name;
+            }
+            res.status(200).json(labelNames);
+        }
+    })
+}
+
+
 export const oneLabelAPI = (req, res, next) => {
     const labelID = req.params.labelID;
 
