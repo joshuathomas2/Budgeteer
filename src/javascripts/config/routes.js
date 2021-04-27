@@ -4,7 +4,7 @@ import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, tra
 import { loginUserAPI, registerUserAPI, getCurrentUserIdAPI } from '../controllers/user';
 import {allTransactionsByUserAPI, allTransactionsByCategoryAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
 import {allCategoriesByUserAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
-import {allLabelsAPI, oneLabelAPI, createLabelAPI, updateLabelAPI, deleteLabelAPI, allLabelsByCategoryAPI} from '../controllers/label';
+import {allLabelsAPI, oneLabelAPI, createLabelAPI, updateLabelAPI, deleteLabelAPI, allLabelsByCategoryAPI, labelNamesByCategoryAPI} from '../controllers/label';
 
 
 import { APP_SECRET } from './vars';
@@ -54,6 +54,7 @@ export function configureRoutes(app) {
     router.get('/api/v1/labels', allLabelsAPI);
     router.get('/api/v1/labels/category/:categoryID', allLabelsByCategoryAPI);
     router.get('/api/v1/labels/one/:labelID', oneLabelAPI);
+    router.get('/api/v1/labels/name/:categoryID', labelNamesByCategoryAPI);
     router.post('/api/v1/labels', createLabelAPI);
     router.put('/api/v1/labels/:labelID', updateLabelAPI);
     router.delete('/api/v1/labels/:labelID', deleteLabelAPI);

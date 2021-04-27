@@ -26,22 +26,31 @@ export function LoginForm(props) {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw Error('Failed to login');
+                    throw Error('Failed to login')
                 }
-
                 return response.text();
             })
             .then(() => {
-                document.location = '/';
+              toast('Successfully signed in', {
+                onClose: () => {
+                  document.location = "/"
+                }
+              })
             })
             .catch((error) => {
-                console.log(error);
+              toast('Failed to sign in', {
+                onClose: () => {
+                  document.location = "/login"
+                }
+              })
             })
         }
     })
 
     return (
+
         <form className="text-center p-5">
+
         <h1 className="mb-2 font-weight-bold text-secondary">
           Welcome to Budgeteer
         </h1>

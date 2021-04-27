@@ -40,7 +40,8 @@ export const oneTransactionAPI = (req, res, next) => {
             res.status(404);
             res.end();
         } else {
-            res.status(200).json(transaction);
+            let singleTransaction = transaction[0];
+            res.status(200).json(singleTransaction);
             res.end();
         }
     })
