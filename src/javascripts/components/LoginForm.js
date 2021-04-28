@@ -1,6 +1,9 @@
 import React from 'react';
 import * as yup from 'yup';
 import {useFormik} from 'formik';
+import { toast } from 'react-toastify';
+
+toast.configure();
 
 export function LoginForm(props) {
 
@@ -9,7 +12,7 @@ export function LoginForm(props) {
         password: yup.string().required()
     });
 
-    let {handleSubmit, handleChange, values, error} = useFormik({
+    let {handleSubmit, handleChange, values, errors} = useFormik({
         initialValues: {
             username: "",
             password: ""
@@ -65,6 +68,7 @@ export function LoginForm(props) {
           onChange={handleChange}
           name="username"
         />
+        <p className="form-errors">{errors.username}</p>
 
         <input
           type="password"
@@ -74,12 +78,8 @@ export function LoginForm(props) {
           onChange={handleChange}
           name="password"
         />
+        <p className="form-errors">{errors.password}</p>
 
-        <div className="d-flex justify-content-around">
-          <div>
-            <a className="text-secondary link-helper" href="/">Forgot password?</a>
-          </div>
-        </div>
 
         <button className="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
           Login
