@@ -54,8 +54,8 @@ export function RegisterForm(props) {
     })
 
     return (
-        <form class="text-center p-5" action="#!">
-            <h2 class="mb-4 font-weight-bold text-secondary">Registration</h2>
+        <form className="text-center p-5" action="#!">
+            <h2 className="mb-4 font-weight-bold text-secondary">Registration</h2>
 
             <input
                 type="text"
@@ -87,11 +87,11 @@ export function RegisterForm(props) {
             />
             <p className="form-errors">{errors.password}</p>
 
-            <button class="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
+            <button classclassName="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
                 Register
             </button>
 
-            <p class="text-secondary">
+            <p classclassName="text-secondary">
                 Already a user? <a class="text-secondary link-helper" href="/login"> Login</a>
             </p>
         </form>

@@ -17,7 +17,7 @@ export function TransactionCard(props) {
         .then((data) => {
           const retrieved_transactions = JSON.parse(data);
           setTransactions(retrieved_transactions);
-          //console.log('Transactions: ' + retrieved_transactions);
+    
         });
     }
   });
