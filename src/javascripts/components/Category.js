@@ -71,6 +71,7 @@ export function Category(props) {
   if (!category || !labels || !transactions) {
     return <span className="text-center">Loading data...</span>;
   } else {
+    console.log(category)
     return (
       <>
         <section id="" className="bg-light my-5">
@@ -105,19 +106,17 @@ export function Category(props) {
                           <th scope="col">Title</th>
                           <th scope="col">Label</th>
                           <th scope="col">Amount</th>
-                          <th scope="col">Edit/Delete</th>
+                          <th scope="col">View</th>
                         </tr>
                       </thead>
                       <tbody>
                         {transactions.map((t) => {
-                          return <TransactionRow key={t._id} transaction={t} />;
+                          return <TransactionRow key={t._id} transaction={t} category={category[0]} />;
                         })}
                       </tbody>
                     </table>
                   </div>
-                  <a href="/transaction/form" className="btn btn-primary">
-                    Add Transaction
-                  </a>
+           
                 </div>
               </div>
             </div>
