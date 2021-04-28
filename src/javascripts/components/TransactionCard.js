@@ -37,7 +37,7 @@ export function TransactionCard(props) {
                       <th scope="col">Title</th>
                       <th scope="col">Label</th>
                       <th scope="col">Amount</th>
-                      <th scope="col">Edit/Delete</th>
+                      <th scope="col">View</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -47,7 +47,7 @@ export function TransactionCard(props) {
                   </tbody>
                 </table>
               </div>
-              <a href="/transaction/form" className="btn btn-primary">
+              <a href={ '/transaction/form?categoryId=' + c._id } className="btn btn-primary">
                 Add Transaction
               </a>
             </div>

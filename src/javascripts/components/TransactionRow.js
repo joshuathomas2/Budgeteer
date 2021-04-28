@@ -37,9 +37,7 @@ export function TransactionRow(props) {
           <a className="text-secondary" href={ '/transaction/form?transactionId=' + t._id + '&categoryId' + c._id }>
             <FontAwesomeIcon icon={faEye} />
           </a>{" "}
-          <a className="text-danger" href="/">
-            <FontAwesomeIcon icon={faMinusCircle} />
-          </a>
+      
         </td>
       </tr>
     );

@@ -1,6 +1,9 @@
 import React from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
+
+toast.configure();
 
 export function RegisterForm(props) {
 
@@ -10,7 +13,7 @@ export function RegisterForm(props) {
         password: yup.string().required()
     });
 
-    let { handleSubmit, handleChange, values, error } = useFormik({
+    let { handleSubmit, handleChange, values, errors } = useFormik({
         initialValues: {
             email: "",
             username: "",
@@ -34,11 +37,19 @@ export function RegisterForm(props) {
                     return response.text();
                 })
                 .then(() => {
-                    document.location = '/';
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
+                    toast('Successfully registered', {
+                      onClose: () => {
+                        document.location = "/"
+                      }
+                    })
+                  })
+                  .catch((error) => {
+                    toast('Failed to register', {
+                      onClose: () => {
+                        document.location = "/login"
+                      }
+                    })
+                  })
         }
     })
 
@@ -54,6 +65,7 @@ export function RegisterForm(props) {
                 onChange={handleChange}
                 name="email"
             />
+            <p className="form-errors">{errors.email}</p>
 
             <input
                 type="text"
@@ -63,6 +75,7 @@ export function RegisterForm(props) {
                 onChange={handleChange}
                 name="username"
             />
+            <p className="form-errors">{errors.username}</p>
 
             <input
                 type="password"
@@ -72,6 +85,7 @@ export function RegisterForm(props) {
                 onChange={handleChange}
                 name="password"
             />
+            <p className="form-errors">{errors.password}</p>
 
             <button class="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
                 Register
