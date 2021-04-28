@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import * as yup from "yup";
-import { useFormik } from "formik";
-
-const validationSchema = yup.object({
-  title: yup.string().required(),
-  notes: yup.string().required(),
-  amount: yup.number().required().min(0),
-  label: yup.string().required(),
-});
+import { TransactionFormik } from "./TransactionFormik";
 
 export function TransactionForm(props) {
   const [transaction, setTransaction] = useState();
@@ -32,22 +24,26 @@ export function TransactionForm(props) {
   let params = new URLSearchParams(search);
   let transaction_id = params.get("transactionId");
   let category_id = params.get("categoryId");
-
-  let is_new = transaction_id === undefined;
+console.log(category_id)
+  let is_new = false; 
+  if (transaction_id) {
+    is_new = true;
+  }
   //retrieving transaction data if it exists
   useEffect(() => {
     if (transaction_id) {
       if (!transaction) {
-      fetch(`/api/v1/transactions/one/${transaction_id}`, {
-        credentials: "same-origin",
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          const retrieved_transaction = JSON.parse(data);
-          setTransaction(retrieved_transaction);
-          console.log(retrieved_transaction)
-        });
-    }}
+        fetch(`/api/v1/transactions/one/${transaction_id}`, {
+          credentials: "same-origin",
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            const retrieved_transaction = JSON.parse(data);
+            setTransaction(retrieved_transaction);
+            //console.log(retrieved_transaction);
+          });
+      }
+    }
   });
 
   //retrieving all labels for current category
@@ -61,153 +57,29 @@ export function TransactionForm(props) {
           .then((data) => {
             const retrieved_labels = JSON.parse(data);
             setLabels(retrieved_labels);
-            console.log(retrieved_labels);
+            //console.log(retrieved_labels);
           });
       }
     }
   });
 
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    errors,
-    setFieldValue,
-    
-  } = useFormik({
-    initialValues: is_new
-      ? {
-          user_id: "",
-          category_id: "",
-          label_id: "",
-          title: "",
-          notes: "",
-          amount: 0,
-        }
-      : {
-          user_id: transaction.user_id, 
-          category_id: transaction.category_id,
-          label_id: transcation.label_id, 
-          title: transaction.title,
-          notes: transaction.notes,
-          amount: transaction.amount
-        },
-    validationSchema,
-    onSubmit(values) {},
-  });
-
-  //checking if this is a new transaction
-  if (!is_new)  {
-    //if so, output form
-    return (
-
-      <form className="text-center p-5" action="#!">
-        <h2 className="mb-4 font-weight-bold text-secondary">Add Transaction</h2>
-
-        <input
-          type="text"
-          className="form-control mb-4 bg-info input-shadow"
-          placeholder="Title"
-          value={values.title}
-          onChange={handleChange}
-          name="title"
-        />
-
-        <textarea
-          className="form-control mb-4 bg-info input-shadow"
-          placeholder="Notes"
-          value={values.notes}
-          onChange={handleChange}
-          name="notes"
-        />
-
-        <select
-          className="form-control mb-4 bg-info input-shadow"
-          id="type"
-          name="label"
-          value={values.label}
-          onChange={handleChange}
-        >
-          {/* //implement a map function rather than the below option tags that dynamically shows all labels for the current category_id that the user is in  */}
-          <option value=""></option>
-          <option value=""></option>
-        </select>
-
-        <input
-          type="number"
-          className="form-control mb-4 bg-info input-shadow"
-          placeholder="Amount"
-          value={values.amount}
-          onChange={handleChange}
-          name="amount"
-        />
-
-        <button
-          className="btn btn-secondary my-4 text-info"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Create
-        </button>
-      </form>
-    );
-
+  if (!is_new) {
+    if (!labels || !userID) {
+      return <p>Loading...</p>;
+    } else {
+      return <TransactionFormik labels={labels} categoryId={category_id} />;
+    }
   } else {
-    //if not new, wait for existing transaction data to render
-    if (!userID || !transaction) {
-      return <p>Loading data..</p>
+    if (!userID || !transaction || !labels) {
+      //console.log(labels)
+      return <p>Loading data..</p>;
     } else {
       return (
-
-        <form className="text-center p-5" action="#!">
-          <h2 className="mb-4 font-weight-bold text-secondary">Add Transaction</h2>
-  
-          <input
-            type="text"
-            className="form-control mb-4 bg-info input-shadow"
-            placeholder="Title"
-            value={values.title}
-            onChange={handleChange}
-            name="title"
-          />
-  
-          <textarea
-            className="form-control mb-4 bg-info input-shadow"
-            placeholder="Notes"
-            value={values.notes}
-            onChange={handleChange}
-            name="notes"
-          />
-  
-          <select
-            className="form-control mb-4 bg-info input-shadow"
-            id="type"
-            name="label"
-            value={values.label}
-            onChange={handleChange}
-          >
-            {/* //implement a map function rather than the below option tags that dynamically shows all labels for the current category_id that the user is in  */}
-            <option value=""></option>
-            <option value=""></option>
-          </select>
-  
-          <input
-            type="number"
-            className="form-control mb-4 bg-info input-shadow"
-            placeholder="Amount"
-            value={values.amount}
-            onChange={handleChange}
-            name="amount"
-          />
-  
-          <button
-            className="btn btn-secondary my-4 text-info"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Create
-          </button>
-        </form>
+        <TransactionFormik
+          transaction={transaction}
+          labels={labels}
+          categoryId={category_id}
+        />
       );
     }
   }
