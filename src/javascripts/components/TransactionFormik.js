@@ -1,18 +1,23 @@
 import React from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import { toast } from 'react-toastify';
+
+toast.configure();
 
 const validationSchema = yup.object({
   title: yup.string().required(),
   notes: yup.string().required(),
   amount: yup.number().required().min(0),
-  label: yup.string().required(),
+  label_id: yup.string().required(),
 });
 
 export function TransactionFormik(props) {
     const transaction = props.transaction; 
     const labels = props.labels;
     const categoryId = props.categoryId;
+    const userId = props.userId;
+    const is_new = props.is_new;
 
   const {
     handleSubmit,
@@ -23,9 +28,9 @@ export function TransactionFormik(props) {
   } = useFormik({
     initialValues: !transaction
       ? {
-          user_id: "",
-          category_id: "",
-          label_id: "",
+          user_id: userId._id,
+          category_id: categoryId,
+          label_id: labels[0]._id,
           title: "",
           notes: "",
           amount: 0,
@@ -34,12 +39,36 @@ export function TransactionFormik(props) {
           ...transaction,
         },
     validationSchema,
-    onSubmit(values) {},
+    onSubmit(values) {
+        fetch(`/api/v1/transactions${is_new ? '' : '/' + transaction._id}`, {
+            method: is_new ? "POST" : "PUT",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            credentials: "same-origin",
+            body: JSON.stringify(values)
+          }).then(() => {
+            toast('Successfully submitted', {
+              onClose: () => {
+                document.location = "/transactions"
+              }
+            })
+          }).catch((error) => {
+            toast('Failed to submit', {
+              onClose: () => {
+                document.location = "/transactions"
+              }
+            })
+          })
+    },
   });
+
 
   return (
     <form className="text-center p-5" action="#!">
-      <h2 className="mb-4 font-weight-bold text-secondary">Add Transaction</h2>
+      <h2 className="mb-4 font-weight-bold text-secondary">{ is_new ? 'Add Transaction' : 'Edit Transaction' }</h2>
+
+
 
       <input
         type="text"
@@ -49,6 +78,7 @@ export function TransactionFormik(props) {
         onChange={handleChange}
         name="title"
       />
+      <p className="form-errors">{errors.title}</p>
 
       <textarea
         className="form-control mb-4 bg-info input-shadow"
@@ -57,17 +87,20 @@ export function TransactionFormik(props) {
         onChange={handleChange}
         name="notes"
       />
+      <p className="form-errors">{errors.notes}</p>
 
       <select
         className="form-control mb-4 bg-info input-shadow"
-        id="type"
-        name="label"
-        value={values.label}
+        id="label_id"
+        name="label_id"
+        value={values.label_id}
         onChange={handleChange}
       >
-        {/* //implement a map function rather than the below option tags that dynamically shows all labels for the current category_id that the user is in  */}
-        <option value=""></option>
-        <option value=""></option>
+        {labels.map((l) => {
+            return (
+                <option value={l._id}>{l.name}</option>
+            );
+        })}
       </select>
 
       <input
@@ -78,13 +111,14 @@ export function TransactionFormik(props) {
         onChange={handleChange}
         name="amount"
       />
+      <p className="form-errors">{errors.amount}</p>
 
       <button
         className="btn btn-secondary my-4 text-info"
         type="submit"
         onClick={handleSubmit}
       >
-        Create
+        Submit
       </button>
     </form>
   );

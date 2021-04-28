@@ -54,7 +54,7 @@ export const createTransactionAPI = (req, res, next) => {
     transaction.user_id = req.body.user_id;
     transaction.category_id = req.body.category_id;
     transaction.label_id = req.body.label_id;
-    transaction.title = req.body.title_id;
+    transaction.title = req.body.title;
     transaction.notes = req.body.notes;
     transaction.amount = req.body.amount;
     transaction.created_date = new Date;
@@ -62,7 +62,7 @@ export const createTransactionAPI = (req, res, next) => {
 
     transaction.save(err => {
         if (err) {
-            res.status(404);
+            res.status(404).json(err);
             res.end();
         } else {
             res.status(200);
@@ -81,7 +81,8 @@ export const updateTransactionAPI = (req, res, next) => {
             label_id: req.body.label_id ? req.body.label_id : transaction.label_id,
             title: req.body.title ? req.body.title : transaction.title,
             notes: req.body.notes ? req.body.notes : transaction.notes,
-            amount: req.body.amount ? req.body.amount : transaction.amount
+            amount: req.body.amount ? req.body.amount : transaction.amount,
+            modified_date: new Date()
         }, err => {
             if (err) {
                 res.status(404);

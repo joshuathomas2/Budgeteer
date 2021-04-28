@@ -25,9 +25,9 @@ export function TransactionForm(props) {
   let transaction_id = params.get("transactionId");
   let category_id = params.get("categoryId");
 console.log(category_id)
-  let is_new = false; 
+  let is_new = true; 
   if (transaction_id) {
-    is_new = true;
+    is_new = false;
   }
   //retrieving transaction data if it exists
   useEffect(() => {
@@ -50,7 +50,7 @@ console.log(category_id)
   useEffect(() => {
     if (category_id) {
       if (!labels) {
-        fetch(`/api/v1/labels/name/${category_id}`, {
+        fetch(`/api/v1/labels/category/${category_id}`, {
           credentials: "same-origin",
         })
           .then((response) => response.text())
@@ -63,11 +63,12 @@ console.log(category_id)
     }
   });
 
-  if (!is_new) {
+  if (is_new) {
     if (!labels || !userID) {
       return <p>Loading...</p>;
     } else {
-      return <TransactionFormik labels={labels} categoryId={category_id} />;
+      return <TransactionFormik labels={labels} categoryId={category_id} userId={userID}
+      is_new= {is_new} />;
     }
   } else {
     if (!userID || !transaction || !labels) {
@@ -79,6 +80,8 @@ console.log(category_id)
           transaction={transaction}
           labels={labels}
           categoryId={category_id}
+          userId={userID}
+          is_new= {is_new}
         />
       );
     }
