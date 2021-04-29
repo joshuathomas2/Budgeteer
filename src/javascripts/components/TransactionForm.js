@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TransactionFormik } from "./TransactionFormik";
+import { LoadingSpinner } from "./LoadingSpinner"
 
 export function TransactionForm(props) {
   const [transaction, setTransaction] = useState();
@@ -65,7 +66,7 @@ export function TransactionForm(props) {
 
   if (is_new) {
     if (!labels || !userID) {
-      return <p>Loading...</p>;
+      return <LoadingSpinner/>;
     } else {
       return <TransactionFormik labels={labels} categoryId={category_id} userId={userID}
       is_new= {is_new} />;
@@ -73,7 +74,7 @@ export function TransactionForm(props) {
   } else {
     if (!userID || !transaction || !labels) {
       //console.log(labels)
-      return <p>Loading data..</p>;
+      return <LoadingSpinner/>;
     } else {
       return (
         <TransactionFormik

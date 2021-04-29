@@ -1,99 +1,73 @@
-import React from 'react';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
-import DatePicker from 'react-datepicker'
-
-
-const validationSchema = yup.object({
-    name: yup.string().required(),
-    planned_amount: yup.number().required().min(0),
-    received_amount: yup.number().required().min(0),
-    status: yup.string().required(),
-    notes: yup.string().required(), 
-    dueDate: yup.date().required(),
-  })
+import React, { useState, useEffect } from 'react';
+import { LabelFormik } from './LabelFormik'
+import { LoadingSpinner } from "./LoadingSpinner"
 
 
 export function LabelForm(props) {
+    const [userID, setUserID] = useState();
+    const [label, setLabel] = useState();
 
-    const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
-        initialValues:  {
-          name: "",
-          planned_amount: 0,
-          received_amount: 0,
-          status: "",
-          notes: "",
-          dueDate: new Date()
-        } , 
-        validationSchema,
-        onSubmit(values){
-        }
+  //retrieving details
+  useEffect(() => {
+    if (!userID) {
+      fetch("/api/v1/users/getCurrentUser", {
+        credentials: "same-origin",
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          const retrieved_id = JSON.parse(data);
+          setUserID(retrieved_id);
+        });
+    }
+  });
+
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let label_id = params.get("labelId");
+  let category_id = params.get("categoryId");
+  let is_new = true;
+  if (label_id) {
+    is_new = false;
+  }
+
+  //retrieving label to use as prop
+  useEffect(() => {
+    if (label_id) {
+      if (!label) {
+        fetch(`/api/v1/labels/one/${label_id}`, {
+          credentials: "same-origin",
         })
-    
-
-    return (
-        
-        <form class="text-center p-5" action="#!">
-            <h2 class="mb-4 font-weight-bold text-secondary">Add Label</h2>
-
-            <input
-                type="text"
-                class="form-control mb-4 bg-info input-shadow"
-                placeholder="Name"
-                value={values.name}
-                onChange={handleChange}
-                name="name"
-            />
-
-            <input
-                type="number"
-                className="form-control mb-4 bg-info input-shadow"
-                placeholder="Planned Amount"
-                value={values.planned_amount}
-                onChange={handleChange}
-                name="planned_amount"
-            />
-
-            <input
-                type="number"
-                className="form-control mb-4 bg-info input-shadow"
-                placeholder="Received Amount"
-                value={values.received_amount}
-                onChange={handleChange}
-                name="received_amount"
-            />
-
-            <input
-                type="text"
-                class="form-control mb-4 bg-info input-shadow"
-                placeholder="Status"
-                value={values.status}
-                onChange={handleChange}
-                name="status"
-            />
-
-            <div className="field mb-3">
-            
-            <div className="input-group has-validation">
-                <div className={errors.due_date ? 'is-invalid' : ''}>
-                <DatePicker placeholderText="Due Date" className={`form-control ${errors.due_date ? 'is-invalid' : ''} bg-info`} id="due_date" name="due_date" selected={values.due_date} onChange={date => setFieldValue('due_date', date)}/>
-                </div>
-            </div>
-            </div>
-
-            <textarea
-                className="form-control mb-4 bg-info input-shadow"
-                placeholder="Notes"
-                value={values.notes}
-                onChange={handleChange}
-                name="notes"
-            />
+          .then((response) => response.text())
+          .then((data) => {
+            const retrieved_label = JSON.parse(data);
+            setLabel(retrieved_label);
+          });
+      }
+    }
+  });
 
 
-            <button class="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
-                Create
-            </button>
-        </form>
-
-    )
-}   
+  if (is_new) {
+    if (!userID || !category_id) {
+      return <LoadingSpinner/>;
+    } else {
+      return <LabelFormik categoryId={category_id} userId={userID}
+      is_new= {is_new} />;
+    }
+  }
+  else {
+    if (!label) {
+      //console.log(labels)
+      return <LoadingSpinner/>;
+    } else {
+      return (
+        <LabelFormik
+          label={label}
+          categoryId={category_id}
+          userId={userID}
+          is_new= {is_new}
+        />
+      );
+    }
+  }
+}

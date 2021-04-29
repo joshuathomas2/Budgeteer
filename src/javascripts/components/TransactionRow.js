@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 export function TransactionRow(props) {
   
@@ -26,7 +27,7 @@ export function TransactionRow(props) {
   });
 
   if (!label) {
-    return <tr><td className="text-center">Loading data...</td></tr>
+    return <tr><LoadingSpinner/></tr>
   } else {
     return (
         <tr>

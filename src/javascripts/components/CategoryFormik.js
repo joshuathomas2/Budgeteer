@@ -62,6 +62,7 @@ export function CategoryFormik(props) {
                         onChange={handleChange}
                         name="name"
                     />
+                    <p className="form-errors">{errors.name}</p>
         
                    
                     <button class="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>

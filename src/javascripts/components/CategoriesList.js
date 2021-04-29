@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
+import { LoadingSpinner } from "./LoadingSpinner"
 
 export function CategoriesListItem(props) {
   const c = props.category;
@@ -7,7 +8,7 @@ export function CategoriesListItem(props) {
   if (!c) {
     return (
       <tr>
-        <td className="text-center">Loading data...</td>
+        <td><LoadingSpinner/></td>
       </tr>
     );
   } else {
