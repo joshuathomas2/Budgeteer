@@ -3,7 +3,7 @@ import {TransactionCard} from './TransactionCard'
 import { useCookies } from 'react-cookie'
 import { set } from "mongoose";
 import { Transaction } from "../models/Transaction";
-
+import { LoadingSpinner } from "./LoadingSpinner"
 
 export const CategoryContext = createContext() 
 
@@ -43,7 +43,7 @@ export function TransactionsCardList(props) {
   })
 
   if (!categories){
-    return (<span className="text-center">Loading data...</span>)
+    return (<loadingSpinner/>)
   } else {
   return (
     <div className="container">

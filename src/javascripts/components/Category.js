@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { TransactionRow } from "./TransactionRow";
 import { useCookies } from "react-cookie";
+import { LoadingSpinner } from "./LoadingSpinner"
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from "react-accessible-accordion";
 
 export function LabelItem(props) {
   const l = props.label;
@@ -8,7 +16,29 @@ export function LabelItem(props) {
   if (!l) {
     return <li className="mt-3 text-secondary">Loading data...</li>;
   } else {
-    return <li className="mt-3 text-secondary">{l.name}</li>;
+    var date = new Date(l.due_date);
+    date = date.toDateString();
+    date = date.slice(0, 10);
+    return (
+      <>
+        <AccordionItem>
+          <AccordionItemHeading>
+            <AccordionItemButton>
+            {l.name}
+            </AccordionItemButton>
+          </AccordionItemHeading>
+          <AccordionItemPanel>
+            <ul>
+              <li>Planned Amount: ${l.planned_amount}</li>
+              <li>Received Amount: ${l.received_amount}</li>
+              <li>Status: {l.status}</li>
+              <li>Due Date: {date}</li>
+              <li><a className="text-secondary" href={'label/form?labelId=' + l._id  }><strong>Edit Label</strong></a></li>
+            </ul>
+          </AccordionItemPanel>
+        </AccordionItem>
+      </>
+    );
   }
 }
 
@@ -69,33 +99,36 @@ export function Category(props) {
   });
 
   if (!category || !labels || !transactions) {
-    return <span className="text-center">Loading data...</span>;
+    return <LoadingSpinner/>;
   } else {
-    console.log(category)
+    console.log(category);
     return (
       <>
         <section id="" className="bg-light my-5">
           <div className="text-center">
-          <h1 className="text-secondary text-center my-4">
-            {category[0].name}
-          </h1>
-          <a href={ '/category/form?categoryId=' + category[0]._id} class=" text-center btn btn-primary">
-           Edit Category
-          </a>
+            <h1 className="text-secondary text-center my-4">
+              {category[0].name}
+              <a
+                href={"/category/form?categoryId=" + category[0]._id}
+                className="mx-3 text-center btn btn-secondary"
+              >
+                Edit Category
+              </a>
+            </h1>
           </div>
-          <div className="row">
-            <div className="col-6">
-              <h4 className="my-3 text-center text-secondary">Labels</h4>
-              <ul className="ml-5 px-5">
-                {labels.map((l) => {
-                  return <LabelItem key={l._id} label={l} />;
-                })}
-              </ul>
-            </div>
-            <div className="col-6">
-              <img></img>
+          <h3 className="my-3 text-center text-secondary">Labels <a href={'/label/form?categoryId=' + category[0]._id } className="text-secondary">+</a></h3>
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <Accordion>
+                  {labels.map((l) => {
+                    return <LabelItem key={l._id} label={l} />;
+                  })}
+                </Accordion>
+              </div>
             </div>
           </div>
+
           <div className="row">
             <div className="col-2"></div>
             <div className="col-8">
@@ -116,12 +149,17 @@ export function Category(props) {
                       </thead>
                       <tbody>
                         {transactions.map((t) => {
-                          return <TransactionRow key={t._id} transaction={t} category={category[0]} />;
+                          return (
+                            <TransactionRow
+                              key={t._id}
+                              transaction={t}
+                              category={category[0]}
+                            />
+                          );
                         })}
                       </tbody>
                     </table>
                   </div>
-           
                 </div>
               </div>
             </div>

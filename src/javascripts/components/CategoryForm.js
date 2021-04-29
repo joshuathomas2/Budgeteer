@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CategoryFormik } from "./CategoryFormik";
+import { LoadingSpinner } from "./LoadingSpinner"
 
 export function CategoryForm(props) {
   const [category, setCategory] = useState();
@@ -44,14 +45,14 @@ export function CategoryForm(props) {
 
   if (is_new) {
     if (!userID) {
-      return <p>Loading...</p>;
+      return <LoadingSpinner/>;
     } else {
       return <CategoryFormik userId={userID} is_new={is_new} />;
     }
   } else {
     if (!userID || !category) {
       //console.log(labels)
-      return <p>Loading data..</p>;
+      return <LoadingSpinner/>;
     } else {
       return (
         <CategoryFormik category={category} userId={userID} is_new={is_new} />
