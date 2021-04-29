@@ -1,46 +1,61 @@
-import React from 'react';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
-
-const validationSchema = yup.object({
-    name: yup.string().required()
-  })
-
+import React, { useState, useEffect } from "react";
+import { CategoryFormik } from "./CategoryFormik";
 
 export function CategoryForm(props) {
+  const [category, setCategory] = useState();
+  const [userID, setUserID] = useState();
 
-    const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
-        initialValues:  {
-          user_id: "",
-          name: ""
-            
-        } , 
-        validationSchema,
-        onSubmit(values){
-   
-        }
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let category_id = params.get("categoryId");
+
+  let is_new = true;
+  if (category_id) {
+    is_new = false;
+  }
+  //retrieving details
+  useEffect(() => {
+    if (!userID) {
+      fetch("/api/v1/users/getCurrentUser", {
+        credentials: "same-origin",
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          const retrieved_id = JSON.parse(data);
+          setUserID(retrieved_id);
+        });
+    }
+  });
+
+  useEffect(() => {
+    if (category_id) {
+      if (!category) {
+        fetch(`/api/v1/categories/one/${category_id}`, {
+          credentials: "same-origin",
         })
-    
+          .then((response) => response.text())
+          .then((data) => {
+            const retrieved_category = JSON.parse(data);
+            setCategory(retrieved_category);
+          });
+      }
+    }
+  });
 
-    return (
-    
-        <form class="text-center p-5" action="#!">
-            <h2 class="mb-4 font-weight-bold text-secondary">Add Category</h2>
-
-            <input
-                type="text"
-                class="form-control mb-4 bg-info input-shadow"
-                placeholder="Name"
-                value={values.name}
-                onChange={handleChange}
-                name="name"
-            />
-
-           
-            <button class="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
-                Create
-            </button>
-        </form>
-
-    )
-}   
+  if (is_new) {
+    if (!userID) {
+      return <p>Loading...</p>;
+    } else {
+      return <CategoryFormik userId={userID} is_new={is_new} />;
+    }
+  } else {
+    if (!userID || !category) {
+      //console.log(labels)
+      return <p>Loading data..</p>;
+    } else {
+      return (
+        <CategoryFormik category={category} userId={userID} is_new={is_new} />
+      );
+    }
+  }
+}

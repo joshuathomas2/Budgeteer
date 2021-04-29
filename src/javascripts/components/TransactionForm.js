@@ -6,7 +6,7 @@ export function TransactionForm(props) {
   const [labels, setLabels] = useState();
   const [userID, setUserID] = useState();
 
-  //retrieving userID
+  //retrieving details
   useEffect(() => {
     if (!userID) {
       fetch("/api/v1/users/getCurrentUser", {
@@ -24,7 +24,7 @@ export function TransactionForm(props) {
   let params = new URLSearchParams(search);
   let transaction_id = params.get("transactionId");
   let category_id = params.get("categoryId");
-console.log(category_id)
+
   let is_new = true; 
   if (transaction_id) {
     is_new = false;
