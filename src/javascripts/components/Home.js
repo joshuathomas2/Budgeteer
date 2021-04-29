@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie'
 import { LoadingSpinner } from "./LoadingSpinner"
+import { Welcome } from "./Welcome"
 
 export function HomeCategoryListItem(props) {
   
@@ -81,47 +82,45 @@ export function Home(props) {
   if (!categories || !transactions){
     return (<LoadingSpinner/>)
   } else {
-	const lastFive = transactions.slice(-5);
-	return (
-		<>
-			<header className="jumbotron my-4 bg-light">
-				<h1 className="display-3 text-secondary text-center">Welcome, {userID.username}!</h1>
-				<div className="row">
-					{/* <div className="col-6">
-						<p>Graph 1</p>
-					</div>
-					<div className="col-6">
-						<p>Graph 2</p>
-					</div> */}
-				</div>
-			</header>
-			<section id="home-info" className="bg-light mb-3">
-				<div className="row">
-					<div className="col-1">
-					</div>
-					<div className="col-lg-3 col-sm-12 mb-5">
-						<h3 className="text-center text-secondary mb-3">Categories</h3>
-						<div className="list-group text-center p-3">
-						{
-     					 	categories.map(c => {
-        					return <HomeCategoryListItem key={c._id} category={c}/>
-      						})
-    					}
-						</div>
-					</div>
-					<div className="col-lg-7 col-sm-12 mb-5">
-					<h3 className="text-center text-secondary mb-3">Recent Transactions</h3>
-						<div className="list-group p-3">
-							{
-								lastFive.map(t => {
-								return <HomeTransactionListItem key={t._id} transaction={t}/>
-								})
-							}
-						</div>
-					</div>
-				</div>
-			</section>
-		</>
+   if (categories.length == 0) {
+     return (<Welcome username = {userID.username}/>)
+   } else {
+
+    const lastFive = transactions.slice(-5);
+    return (
+      <>
+        <header className="jumbotron my-4 bg-light">
+          <h1 className="display-3 text-secondary text-center">Welcome, {userID.username}!</h1>
+          <div className="row">
+          </div>
+        </header>
+        <section id="home-info" className="bg-light mb-3">
+          <div className="row">
+            <div className="col-1">
+            </div>
+            <div className="col-lg-3 col-sm-12 mb-5">
+              <h3 className="text-center text-secondary mb-3">Categories</h3>
+              <div className="list-group text-center p-3">
+              {
+                  categories.map(c => {
+                    return <HomeCategoryListItem key={c._id} category={c}/>
+                    })
+                }
+              </div>
+            </div>
+            <div className="col-lg-7 col-sm-12 mb-5">
+            <h3 className="text-center text-secondary mb-3">Recent Transactions</h3>
+              <div className="list-group p-3">
+                {
+                  lastFive.map(t => {
+                  return <HomeTransactionListItem key={t._id} transaction={t}/>
+                  })
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+      </>
 	)
-					}
+}			}
 }

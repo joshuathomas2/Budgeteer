@@ -43,7 +43,7 @@ export function TransactionsCardList(props) {
   })
 
   if (!categories){
-    return (<loadingSpinner/>)
+    return (<LoadingSpinner/>)
   } else {
   return (
     <div className="container">
