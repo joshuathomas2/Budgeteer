@@ -40,3 +40,7 @@ export const labelForm = (req, res, next) => {
 export const categoryForm = (req, res, next) => {
     res.render('layout', {content: 'category_form'});
 }
+
+export const errorPage = (req, res, next) => {
+    res.render('layout', {content: 'data_error'});
+}

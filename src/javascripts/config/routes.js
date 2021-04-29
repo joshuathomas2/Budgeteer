@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm, categoryForm, labelForm} from '../controllers/index';
+import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm, categoryForm, labelForm, errorPage} from '../controllers/index';
 import { loginUserAPI, registerUserAPI, getCurrentUserIdAPI } from '../controllers/user';
 import {allTransactionsByUserAPI, allTransactionsByCategoryAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
 import {allCategoriesByUserAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
@@ -29,6 +29,9 @@ export function configureRoutes(app) {
     router.get('/category/form', requireSignIn, categoryForm);
     router.get('/label/form', requireSignIn, labelForm);
     router.get('/category', requireSignIn, categoryPage);
+    router.get('/error', requireSignIn, errorPage);
+
+
 
     
     // How do we want to do this? Going to / should take a user to the homepage if signed in

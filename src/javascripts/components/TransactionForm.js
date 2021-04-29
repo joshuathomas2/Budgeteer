@@ -66,7 +66,7 @@ export function TransactionForm(props) {
 
   if (is_new) {
     if (!labels || !userID) {
-      return <LoadingSpinner/>;
+      document.location='/error?type=label'
     } else {
       return <TransactionFormik labels={labels} categoryId={category_id} userId={userID}
       is_new= {is_new} />;
