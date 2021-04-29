@@ -34,17 +34,16 @@ export function LoginForm(props) {
                 return response.text();
             })
             .then(() => {
-              toast('Successfully signed in', {
+              toast.success('Successfully signed in!', {
                 onClose: () => {
                   document.location = "/"
-                }
+                },
+                autoClose: 2000
               })
             })
             .catch((error) => {
-              toast('Failed to sign in', {
-                onClose: () => {
-                  document.location = "/login"
-                }
+              toast.error('Failed to sign in! Incorrect username or password!', {
+                autoClose: 5000
               })
             })
         }

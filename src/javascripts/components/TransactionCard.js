@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TransactionRow } from "./TransactionRow";
 import { useCookies } from "react-cookie";
+import { LoadingSpinner } from "./LoadingSpinner"
 
 export function TransactionCard(props) {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -23,13 +24,13 @@ export function TransactionCard(props) {
   });
 
   if (!transactions) {
-    return <span className="text-center">Loading data...</span>;
+    return <LoadingSpinner/>;
   } else {
     return (
    
           <div className="card bg-info m-3">
             <div className="card-body">
-              <h3 className="card-title">{ c.name }</h3>
+              <h3 className="card-title text-secondary">{ c.name }</h3>
               <div style={{ overflowX: 'auto' }}>
                 <table className="table table-striped">
                   <thead>
