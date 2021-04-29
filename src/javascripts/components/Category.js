@@ -75,9 +75,14 @@ export function Category(props) {
     return (
       <>
         <section id="" className="bg-light my-5">
+          <div className="text-center">
           <h1 className="text-secondary text-center my-4">
             {category[0].name}
           </h1>
+          <a href={ '/category/form?categoryId=' + category[0]._id} class=" text-center btn btn-primary">
+           Edit Category
+          </a>
+          </div>
           <div className="row">
             <div className="col-6">
               <h4 className="my-3 text-center text-secondary">Labels</h4>
