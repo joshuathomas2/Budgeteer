@@ -52,16 +52,18 @@ const validationSchema = yup.object({
                 credentials: "same-origin",
                 body: JSON.stringify(values)
               }).then(() => {
-                toast('Successfully submitted label', {
+                toast.success('Successfully submitted label!', {
                   onClose: () => {
                     document.location = `/categories`
-                  }
+                  },
+                  autoClose: 2000
                 })
               }).catch((error) => {
-                toast('Failed to submit label', {
+                toast.error('Failed to submit label!', {
                   onClose: () => {
                     document.location =  `/categories`
-                  }
+                  },
+                  autoClose: 2000
                 })
               })
         }

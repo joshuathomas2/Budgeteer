@@ -35,16 +35,18 @@ export function CategoryFormik(props) {
                 credentials: "same-origin",
                 body: JSON.stringify(values)
               }).then(() => {
-                toast('Successfully submitted', {
+                toast.success('Successfully submitted category!', {
                   onClose: () => {
                     document.location = "/categories"
-                  }
+                  },
+                  autoClose: 2000
                 })
               }).catch((error) => {
-                toast('Failed to submit', {
+                toast.error('Failed to submit category!', {
                   onClose: () => {
                     document.location = "/categories"
-                  }
+                  },
+                  autoClose: 2000
                 })
               })
         }
