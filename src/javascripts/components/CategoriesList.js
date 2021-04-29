@@ -61,7 +61,7 @@ export function CategoriesList(props) {
   });
 
   if (!categories) {
-    return <span className="text-center">Loading data...</span>;
+    return <LoadingSpinner/>;
   } else {
     return (
       <>
