@@ -1,4 +1,4 @@
-![firefox_svjlteKFcw](https://user-images.githubusercontent.com/18540995/114949748-e42fca00-9e0e-11eb-87dd-eb0f5faef4b3.png)
+![firefox_5nGD8kFHCh](https://user-images.githubusercontent.com/18540995/116604374-426aab80-a8eb-11eb-9a1e-98cc04671c90.png)
 
 
 # Budgeteer

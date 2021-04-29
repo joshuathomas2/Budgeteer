@@ -37,17 +37,19 @@ export function RegisterForm(props) {
                     return response.text();
                 })
                 .then(() => {
-                    toast('Successfully registered', {
+                    toast.success('Successfully registered!', {
                       onClose: () => {
                         document.location = "/"
-                      }
+                      },
+                      autoClose: 2000
                     })
                   })
                   .catch((error) => {
-                    toast('Failed to register', {
+                    toast.error('Failed to register!', {
                       onClose: () => {
                         document.location = "/login"
-                      }
+                      },
+                      autoClose: 2000
                     })
                   })
         }

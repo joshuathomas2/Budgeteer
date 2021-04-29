@@ -48,16 +48,18 @@ export function TransactionFormik(props) {
             credentials: "same-origin",
             body: JSON.stringify(values)
           }).then(() => {
-            toast('Successfully submitted', {
+            toast.success('Successfully submitted transaction!', {
               onClose: () => {
                 document.location = "/transactions"
-              }
+              },
+              autoClose: 2000
             })
           }).catch((error) => {
-            toast('Failed to submit', {
+            toast.error('Failed to submit transaction!', {
               onClose: () => {
                 document.location = "/transactions"
-              }
+              },
+              autoClose: 2000
             })
           })
     },
