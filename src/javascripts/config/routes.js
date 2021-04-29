@@ -1,10 +1,10 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm} from '../controllers/index';
+import {homePage, registerPage, loginPage, categoriesListPage, categoryPage, transactionsListPage, transactionForm, categoryForm, labelForm} from '../controllers/index';
 import { loginUserAPI, registerUserAPI, getCurrentUserIdAPI } from '../controllers/user';
 import {allTransactionsByUserAPI, allTransactionsByCategoryAPI, oneTransactionAPI, createTransactionAPI, updateTransactionAPI, deleteTransactionAPI} from '../controllers/transaction';
 import {allCategoriesByUserAPI, oneCategoryAPI, createCategoriesAPI, updateCategoryAPI, deleteCategoryAPI} from '../controllers/category';
-import {allLabelsAPI, oneLabelAPI, createLabelAPI, updateLabelAPI, deleteLabelAPI} from '../controllers/label';
+import {allLabelsAPI, oneLabelAPI, createLabelAPI, updateLabelAPI, deleteLabelAPI, allLabelsByCategoryAPI, labelNamesByCategoryAPI} from '../controllers/label';
 
 
 import { APP_SECRET } from './vars';
@@ -23,20 +23,17 @@ export function configureRoutes(app) {
     // PAGES
     router.get('/register', registerPage);
     router.get('/login', loginPage);
-    router.get('/categories', categoriesListPage);
-    router.get('/transactions', transactionsListPage);
-    router.get('/transaction', transactionForm);
+    router.get('/categories', requireSignIn, categoriesListPage);
+    router.get('/transactions', requireSignIn, transactionsListPage);
+    router.get('/transaction/form', requireSignIn, transactionForm);
+    router.get('/category/form', requireSignIn, categoryForm);
+    router.get('/label/form', requireSignIn, labelForm);
+    router.get('/category', requireSignIn, categoryPage);
 
-    // Needs to have an id passed in to access specific resource TODO
-    router.get('/category', categoryPage);
     
-
     // How do we want to do this? Going to / should take a user to the homepage if signed in
     // and login page if not signed in? TODO
-    router.get('/', homePage);
-
-    // API
-    // TODO
+    router.get('/', requireSignIn, homePage);
 
     //TRANSACTIONS API
     router.get('/api/v1/transactions/user/:userID', allTransactionsByUserAPI);
@@ -48,14 +45,16 @@ export function configureRoutes(app) {
 
     //CATEGORIES API
     router.get('/api/v1/categories/user/:userID', allCategoriesByUserAPI)
-    //router.get('/api/v1/categories/one/:categoryID', oneCategoryAPI)
+    router.get('/api/v1/categories/one/:categoryID', oneCategoryAPI)
     router.post('/api/v1/categories', createCategoriesAPI)
     router.put('/api/v1/categories/:categoryID', updateCategoryAPI)
     router.delete('/api/v1/categories/:categoryID', deleteCategoryAPI)
 
     //LABELS API
     router.get('/api/v1/labels', allLabelsAPI);
+    router.get('/api/v1/labels/category/:categoryID', allLabelsByCategoryAPI);
     router.get('/api/v1/labels/one/:labelID', oneLabelAPI);
+    router.get('/api/v1/labels/name/:categoryID', labelNamesByCategoryAPI);
     router.post('/api/v1/labels', createLabelAPI);
     router.put('/api/v1/labels/:labelID', updateLabelAPI);
     router.delete('/api/v1/labels/:labelID', deleteLabelAPI);
@@ -83,7 +82,7 @@ function requireSignIn(req, res, next) {
         next();
     } else {
         res.status(401);
-        res.end();
+        res.render('layout', {content: 'login'});
     }
 }
 

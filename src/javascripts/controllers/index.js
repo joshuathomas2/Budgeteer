@@ -29,5 +29,14 @@ export const categoriesListPage = (req, res, next) => {
 } 
 
 export const categoryPage = (req, res, next) => {
-    res.render('layout', {content: 'category'});
+
+    res.render('layout', {content: 'category'} );
 } 
+
+export const labelForm = (req, res, next) => {
+    res.render('layout', {content: 'label_form'});
+}
+
+export const categoryForm = (req, res, next) => {
+    res.render('layout', {content: 'category_form'});
+}

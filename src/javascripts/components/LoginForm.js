@@ -1,6 +1,9 @@
 import React from 'react';
 import * as yup from 'yup';
 import {useFormik} from 'formik';
+import { toast } from 'react-toastify';
+
+toast.configure();
 
 export function LoginForm(props) {
 
@@ -9,7 +12,7 @@ export function LoginForm(props) {
         password: yup.string().required()
     });
 
-    let {handleSubmit, handleChange, values, error} = useFormik({
+    let {handleSubmit, handleChange, values, errors} = useFormik({
         initialValues: {
             username: "",
             password: ""
@@ -26,22 +29,31 @@ export function LoginForm(props) {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw Error('Failed to login');
+                    throw Error('Failed to login')
                 }
-
                 return response.text();
             })
             .then(() => {
-                document.location = '/';
+              toast('Successfully signed in', {
+                onClose: () => {
+                  document.location = "/"
+                }
+              })
             })
             .catch((error) => {
-                console.log(error);
+              toast('Failed to sign in', {
+                onClose: () => {
+                  document.location = "/login"
+                }
+              })
             })
         }
     })
 
     return (
+
         <form className="text-center p-5">
+
         <h1 className="mb-2 font-weight-bold text-secondary">
           Welcome to Budgeteer
         </h1>
@@ -56,6 +68,7 @@ export function LoginForm(props) {
           onChange={handleChange}
           name="username"
         />
+        <p className="form-errors">{errors.username}</p>
 
         <input
           type="password"
@@ -65,12 +78,8 @@ export function LoginForm(props) {
           onChange={handleChange}
           name="password"
         />
+        <p className="form-errors">{errors.password}</p>
 
-        <div className="d-flex justify-content-around">
-          <div>
-            <a className="text-secondary link-helper" href="/">Forgot password?</a>
-          </div>
-        </div>
 
         <button className="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
           Login

@@ -1,80 +1,89 @@
-import React from 'react';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
-
-const validationSchema = yup.object({
-    title: yup.string().required(),
-    notes: yup.string().required(),
-    amount: yup.number().required().min(0),
-    label: yup.string().required()
-  })
-
+import React, { useState, useEffect } from "react";
+import { TransactionFormik } from "./TransactionFormik";
 
 export function TransactionForm(props) {
+  const [transaction, setTransaction] = useState();
+  const [labels, setLabels] = useState();
+  const [userID, setUserID] = useState();
 
-    const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
-        initialValues:  {
-          title: "",
-          notes: "",
-          amount: 0,
-          label: ""
-     
-        } , 
-        validationSchema,
-        onSubmit(values){
-        }
+  //retrieving details
+  useEffect(() => {
+    if (!userID) {
+      fetch("/api/v1/users/getCurrentUser", {
+        credentials: "same-origin",
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          const retrieved_id = JSON.parse(data);
+          setUserID(retrieved_id);
+        });
+    }
+  });
+
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let transaction_id = params.get("transactionId");
+  let category_id = params.get("categoryId");
+
+  let is_new = true; 
+  if (transaction_id) {
+    is_new = false;
+  }
+  //retrieving transaction data if it exists
+  useEffect(() => {
+    if (transaction_id) {
+      if (!transaction) {
+        fetch(`/api/v1/transactions/one/${transaction_id}`, {
+          credentials: "same-origin",
         })
-    
+          .then((response) => response.text())
+          .then((data) => {
+            const retrieved_transaction = JSON.parse(data);
+            setTransaction(retrieved_transaction);
+            //console.log(retrieved_transaction);
+          });
+      }
+    }
+  });
 
-    return (
-        //to be addedlabel picker: dropdown? 
-        <form class="text-center p-5" action="#!">
-            <h2 class="mb-4 font-weight-bold text-secondary">Add Transaction</h2>
+  //retrieving all labels for current category
+  useEffect(() => {
+    if (category_id) {
+      if (!labels) {
+        fetch(`/api/v1/labels/category/${category_id}`, {
+          credentials: "same-origin",
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            const retrieved_labels = JSON.parse(data);
+            setLabels(retrieved_labels);
+            //console.log(retrieved_labels);
+          });
+      }
+    }
+  });
 
-            <input
-                type="text"
-                class="form-control mb-4 bg-info input-shadow"
-                placeholder="Title"
-                value={values.title}
-                onChange={handleChange}
-                name="title"
-            />
-
-            <textarea
-                className="form-control mb-4 bg-info input-shadow"
-                placeholder="Notes"
-                value={values.notes}
-                onChange={handleChange}
-                name="notes"
-            />
-
-            <select
-              className= "form-control mb-4 bg-info input-shadow"
-              id="type"
-              name="label"
-              value={values.label}
-              onChange={handleChange}
-            >
-              <option value=""></option>
-              <option value="">Label</option>
-            
-            </select>
-
-            <input
-                type="number"
-                className="form-control mb-4 bg-info input-shadow"
-                placeholder="Amount"
-                value={values.amount}
-                onChange={handleChange}
-                name="amount"
-            />
-
-            {/* implement a dropdown that shows options for all available labels for a user's category */}
-
-            <button class="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
-                Create
-            </button>
-        </form>
-
-    )
-}   
+  if (is_new) {
+    if (!labels || !userID) {
+      return <p>Loading...</p>;
+    } else {
+      return <TransactionFormik labels={labels} categoryId={category_id} userId={userID}
+      is_new= {is_new} />;
+    }
+  } else {
+    if (!userID || !transaction || !labels) {
+      //console.log(labels)
+      return <p>Loading data..</p>;
+    } else {
+      return (
+        <TransactionFormik
+          transaction={transaction}
+          labels={labels}
+          categoryId={category_id}
+          userId={userID}
+          is_new= {is_new}
+        />
+      );
+    }
+  }
+}
