@@ -89,11 +89,11 @@ export function RegisterForm(props) {
             />
             <p className="form-errors">{errors.password}</p>
 
-            <button classclassName="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
+            <button className="btn btn-secondary my-4 text-info" type="submit" onClick={handleSubmit}>
                 Register
             </button>
 
-            <p classclassName="text-secondary">
+            <p className="text-secondary">
                 Already a user? <a class="text-secondary link-helper" href="/login"> Login</a>
             </p>
         </form>
